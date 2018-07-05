@@ -141,9 +141,9 @@ table .gsc-search-box{
 div .gsc-control-wrapper-cse > table .gsc-search-box {
     border-collapse: none !important;
 }
-table{
+/* table{
     border-collapse:  !important;
-}
+} */
 .cse input.gsc-input, input.gsc-input {
     background-image:none !important;
 }
