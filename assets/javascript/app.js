@@ -106,4 +106,8 @@ $(document).ready( function(){
             });
         });
 
+    // changing google searchbar placeholder text
+    // this is not working :(
+    $('#gsc-i-id1').placeholder = 'Search Google';
+
 }); // closing ready function

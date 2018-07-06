@@ -2,6 +2,7 @@ body{
     margin: 0;
     height: 100%;
 }
+
 /* DIV THAT CONTAINS THE IMAGE */
 #container{
    width:100%;
@@ -12,8 +13,8 @@ body{
    background-position:center center;
    position: fixed;
 }
-/* THE WEATHER DIV BEFORE CLICKING */
 
+/* THE WEATHER DIV BEFORE CLICKING */
 #weather{
     padding: 1%;
     position: fixed;
@@ -75,6 +76,7 @@ canvas {
     color:#eff2f7;
     border-radius: 5px;
 }
+
 /* THE CLOCK CONTAINER */
 #time{
     position: fixed;
@@ -85,6 +87,7 @@ canvas {
     color: white;
     background-color: rgb(1, 11, 28, 0.5);
     border-radius: 20px;
+    padding: 0 1.75rem 0 1.75rem;
 }
 #quote{
     color:#eff2f7;
@@ -144,7 +147,7 @@ div .gsc-control-wrapper-cse > table .gsc-search-box {
 /* table{
     border-collapse:  !important;
 } */
-.cse input.gsc-input, input.gsc-input {
+.cse input.gsc-input {
     background-image:none !important;
 }
 input #gsc-i-id1 .gsc-input{
@@ -156,10 +159,15 @@ input #gsc-i-id1 .gsc-input{
 input.gsc-input { 
     color: white !important;
     background: none;
+    background-image:none !important;
  }
 .gsst_a .gscb_a{
     color: white !important;
 }
+.gsc-input {
+    text-indent: 5px;
+}
+
 
 
 
