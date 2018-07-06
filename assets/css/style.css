@@ -111,6 +111,21 @@ blockquote{
     height: fit-content;
     font-size: 2vh;
 }
+
+/* GOOGLE SEARCH */
+/* this is not working either :( */
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    content: 'Search Google';
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    content: 'Search Google';
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    content: 'Search Google';
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    content: 'Search Google';
+  }
 div .gsc-control-cse{
     width: 30%;
     background: transparent;

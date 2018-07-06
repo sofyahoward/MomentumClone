@@ -29,7 +29,7 @@ $(document).ready( function(){
         m = checkTime(m);
         document.getElementById('time').innerHTML = h + ":" + m;
         t = setTimeout(function () {
-            startTime()
+            startTime();
         }, 500);
     }
     startTime();
@@ -54,6 +54,34 @@ $(document).ready( function(){
             var lat = data.latitude;
             var long = data.longitude;
             console.log(lat, long)
+
+            // grabbing list of local events from eventbrite
+            var token = '6A7TOLR2YF2M2YFHJDWA';
+            var $events = $("#events");
+            
+            $.get('https://www.eventbriteapi.com/v3/events/search/?token='+token+'&expand=venue'+'&sort_by=date&location.latitude='+lat+'&location.longitude='+long+'' , function(res) {
+                console.log(res);
+                if(res.events.length) {
+                    var s = "<ul class='eventList'>";
+                    for(var i=0;i<res.events.length;i++) {
+                        var event = res.events[i];
+                        console.dir(event);
+                        s += "<li><a href='" + event.url + "'>" + event.name.text + "</a> - " + event.description.text + "</li>";
+                    }
+                    s += "</ul>";
+                    $events.html(s);
+                } else {
+                    $events.html("<p>Sorry, there are no upcoming events.</p>");
+                }
+
+                var eventLat = event.venue.latitude;
+                    console.log(eventLat);
+                var eventLong = event.venue.longitude;
+                    console.log(eventLong);
+            });
+            
+
+
 
             var proxy = 'https://cryptic-headland-94862.herokuapp.com/';
             var darkSkyAPI = `https://api.darksky.net/forecast/8731619e7a890afa3e28099bc6d36035/${lat},${long}`;
@@ -105,6 +133,17 @@ $(document).ready( function(){
                 }
             });
         });
+
+
+
+        
+		
+       
+            
+            
+    
+
+
 
     // changing google searchbar placeholder text
     // this is not working :(
