@@ -61,27 +61,42 @@ $(document).ready( function(){
             
             $.get('https://www.eventbriteapi.com/v3/events/search/?token='+token+'&expand=venue'+'&sort_by=date&location.latitude='+lat+'&location.longitude='+long+'' , function(res) {
                 console.log(res);
-                if(res.events.length) {
-                    var s = "<ul class='eventList'>";
-                    for(var i=0;i<res.events.length;i++) {
+                if (res.events.length) {
+                    var eventList = `<ul class='eventList'>`;
+                    for (var i=0;i<res.events.length;i++) {
                         var event = res.events[i];
                         console.dir(event);
-                        s += "<li><a href='" + event.url + "'>" + event.name.text + "</a> - " + event.description.text + "</li>";
+
+                        eventList += `<li><div class="col s12 m7">
+                        <div class="card">
+                        <div class="card-image">
+                            <img src="images/sample-1.jpg">
+                            <span class="card-title">`+event.name.text+`</span>
+                        </div>
+                        <div class="card-content">
+                            <p>`+event.description+`</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="`+event.url+`">Register</a>
+                        </div>
+                        </div>
+                    </div></li>`;
+
+                        // eventList += "<li><a href='" + event.url + "'>" + event.name.text + "</a> - " + event.description.text + "</li>";
                     }
-                    s += "</ul>";
-                    $events.html(s);
+                    eventList += `</ul>`;
+                    $events.html(eventList);
+
                 } else {
-                    $events.html("<p>Sorry, there are no upcoming events.</p>");
+                    $events.html("<p>Sorry, there are no upcoming events in your area.</p>");
                 }
 
                 var eventLat = event.venue.latitude;
                     console.log(eventLat);
                 var eventLong = event.venue.longitude;
                     console.log(eventLong);
+
             });
-            
-
-
 
             var proxy = 'https://cryptic-headland-94862.herokuapp.com/';
             var darkSkyAPI = `https://api.darksky.net/forecast/8731619e7a890afa3e28099bc6d36035/${lat},${long}`;
