@@ -29,7 +29,7 @@ $(document).ready( function(){
         m = checkTime(m);
         document.getElementById('time').innerHTML = h + ":" + m;
         t = setTimeout(function () {
-            startTime()
+            startTime();
         }, 500);
     }
     startTime();
@@ -54,6 +54,63 @@ $(document).ready( function(){
             var lat = data.latitude;
             var long = data.longitude;
             console.log(lat, long)
+
+            // grabbing list of local events from eventbrite
+            // this seems to break when there's no image for an event
+            var token = '6A7TOLR2YF2M2YFHJDWA';
+            var $events = $("#events");
+            
+            $.get('https://www.eventbriteapi.com/v3/events/search/?token='+token+'&expand=venue'+'&sort_by=date&location.latitude='+lat+'&location.longitude='+long+'' , function(res) {
+                console.log(res);
+                if (res.events.length) {
+                    var eventList = `<ul class='eventList'>`;
+                    for (var i = 0; i < res.events.length; i++) {
+                        // limiting event list to 5
+                        res.events.length = 5;
+                        var event = res.events[i];
+                        console.dir(event);
+
+                        eventList += `<li><div class="col s12 m6">
+                        <div class="card sticky-action style="overflow:visible;">
+                        <div class="card-image waves-effect waves-block waves-light">
+                            <img class="activator" src="`+ event.logo.url +`">
+                            <span class="card-title"></span>
+                        </div>
+                        <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">`+event.name.text+`<i class="material-icons right">more_vert</i></span>
+                            <p><a target="_blank" href="#">`+event.venue.address.localized_address_display+`</a></p>
+                        </div>
+                        <div class="card-action">
+                            <p>`+event.start.local+ " to " +event.end.local+`</p>
+                            <a target="_blank" href="`+event.url+`">Register [icon here]</a>
+                        </div>
+                        <div class="card-reveal">
+                            <span class="card-title grey-text text-darken-4">`+event.name.text+`<i class="material-icons right">close</i></span>
+                            <p>`+event.description.text+`</p>
+                        </div>
+                        </div>
+                    </div></li>`;
+
+                    // if (event.logo.url === null) {
+                    //     $('.activator').attr('src', 'https://logoeps.com/wp-content/uploads/2012/10/eventbrite-logo-vector.png');
+                    // }
+
+                    // the event times need to be converted to an unstandable format
+
+                    }
+                    eventList += `</ul>`;
+                    $events.html(eventList);
+
+                } else {
+                    $events.html("<p>Sorry, there are no upcoming events in your area.</p>");
+                }
+
+                var eventLat = event.venue.latitude;
+                    console.log(eventLat);
+                var eventLong = event.venue.longitude;
+                    console.log(eventLong);
+
+            });
 
             var proxy = 'https://cryptic-headland-94862.herokuapp.com/';
             var darkSkyAPI = `https://api.darksky.net/forecast/8731619e7a890afa3e28099bc6d36035/${lat},${long}`;
@@ -105,5 +162,20 @@ $(document).ready( function(){
                 }
             });
         });
+
+
+
+        
+		
+       
+            
+            
+    
+
+
+
+    // changing google searchbar placeholder text
+    // this is not working :(
+    $('#gsc-i-id1').placeholder = 'Search Google';
 
 }); // closing ready function

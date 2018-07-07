@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- google/materialize font icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Materialize CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
     <!-- custom stylesheet -->
@@ -19,11 +21,11 @@
         <div id="searchBar">
             <gcse:search></gcse:search>
         </div>
-        <!-- search results modal trigger -->
+        <!-- weather modal trigger -->
         <div class="modal-trigger" id="weather" href="#modal1">
             <canvas id="icon" width="40" height="40"></canvas>
         </div>
-        <!-- search results modal structure -->
+        <!-- weather modal structure -->
         <div id="modal1" class="modal">
             <div class="full-modal">
                 <div class="modal-content">
@@ -48,14 +50,35 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">X</a>
+                    <a href="#!" class="modal-close waves-effect waves-green btn-flat"><i class="material-icons">close</i></a>
                 </div>
             </div>
         </div>
-        <!-- time appears here -->
+        <!-- clock appears here -->
         <div id="time"></div>
-        <!-- random quote appears here -->
+
+        <!-- button to trigger event list modal -->
+        <a id="eventsTrigger" class="waves-effect waves-light btn deep-orange modal-trigger" href="#eventsModal">View Events Near You</a>
+        <!-- event list appears here -->
+        <div id="eventsModal" class="modal">
+            <div class="full-modal">
+                <div class="modal-content">
+                    <h5 class="eventsModalTitle">Events Near You</h5>
+                </div>
+                <div class= "container">
+                        <div id="events"></div>
+                </div>
+                <div id="eventsModalFooter" class="modal-footer">
+                    <a href="#!" class="modal-close btn-flat"><i class="material-icons">close</i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- quote appears here -->
         <div id="quote"></div>
+
+    <!-- closing container div below -->
+    </div>
 </body>
 
 <!-- Materialize JS -->
