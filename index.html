@@ -11,82 +11,156 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
     <!-- custom stylesheet -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <!-- firebase UI for login form -->
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
     <!-- jQuery CDN -->
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Fira+Mono" rel="stylesheet">
+    <!-- custom JS -->
+    <script src="assets/javascript/app.js"></script>
 </head>
 
 <body>
-    <div id="container">
-        <!-- begin google searchbar -->
-        <div id="searchBar">
-            <gcse:search></gcse:search>
+    <div id="containerSignIn">
+        <!-- sign up or login initial landing page -->
+        <div id="signUpOrLogin">
+            <button id="loginBtn" onclick="loginDisplay()">Login</button>
+            <button id="signUpBtn" onclick="signupDisplay()">Sign Up</button>
         </div>
-        <!-- weather modal trigger -->
-        <div class="modal-trigger" id="weather" href="#modal1">
-            <canvas id="icon" width="40" height="40"></canvas>
+        <div id="signUpBackground">
+                <div id="signup_div" class="signup-div">
+                        <div class="welcomeHeader">Welcome to My Day 👋</div>
+                        <div class="welcomeText">📝 📰 ☀️ and Google all personalized and specially prepared for you!</div>
+                        <br>
+                        <input type="text" placeholder="Your Name..." id="userName_fieldSignUp">
+                        <br>
+                        <br>
+                        <input type="email" placeholder="Email..." id="email_fieldSignUp">
+                        <br>
+                        <br>
+                        <input type="password" placeholder="Password..." id="password_fieldSignUp">
+                        <br>
+                        <br>
+                        <button id="signUpInButton" onclick="signUp()">Sign Up Now</button>
+                        <br>
+                        <br>
+                        <div class='error'></div>
+                    </div>
         </div>
-        <!-- weather modal structure -->
-        <div id="modal1" class="modal">
-            <div class="full-modal">
-                <div class="modal-content">
-                    <div id="weatherIcon"></div>
-                    <canvas id="icon2" width="75" height="75"></canvas>
-                </div>
-                <div class=container>
-                    <div id="day1">
-                        <canvas id="icon3" width="30" height="30"></canvas>
-                    </div>
-                    <div id="day2">
-                        <canvas id="icon4" width="30" height="30"></canvas>
-                    </div>
-                    <div id="day3">
-                        <canvas id="icon5" width="30" height="30"></canvas>
-                    </div>
-                    <div id="day4">
-                        <canvas id="icon6" width="30" height="30"></canvas>
-                    </div>
-                    <div id="day5">
-                        <canvas id="icon7" width="30" height="30"></canvas>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <a href="#!" class="modal-close waves-effect waves-green btn-flat"><i class="material-icons">close</i></a>
-                </div>
+           
+        <div id="logInBackground">
+            <div id="login_div" class="main-div">
+                <div class="welcomeHeader">Nice to See You Again 🤗</div>
+                <div class="welcomeText">💐 Start Your Day Here! ☕</div>
+                <br>
+                <input type="email" placeholder="Email..." id="email_field">
+                <br>
+                <br>
+                <input type="password" placeholder="Password..." id="password_field">
+                <br>
+                <br>
+                <button id="logInButton" onclick="login()">Login to Account</button>
+                <br>
+                <br>
+                <div class='error'></div>
             </div>
         </div>
-        <!-- clock appears here -->
-        <div id="time"></div>
+        
+            <div id="user_div" class="loggedin-div">
+                <div id="user_para"></div>
+                <button id="logoutButton" onclick="logout()"><img src="exit.png" alt="log out"></button>
+            </div>
 
-        <!-- button to trigger event list modal -->
-        <a id="eventsTrigger" class="waves-effect waves-light btn deep-orange modal-trigger" href="#eventsModal">View Events Near You</a>
-        <!-- event list appears here -->
-        <div id="eventsModal" class="modal">
-            <div class="full-modal">
-                <div class="modal-content">
-                    <h5 class="eventsModalTitle">Events Near You</h5>
-                </div>
-                <div class= "container">
-                        <div id="events"></div>
-                </div>
-                <div id="eventsModalFooter" class="modal-footer">
-                    <a href="#!" class="modal-close btn-flat"><i class="material-icons">close</i></a>
+
+
+        <div id="container">
+            <!-- begin google searchbar -->
+            <div id="searchBar">
+                <gcse:search></gcse:search>
+            </div>
+            <!-- weather modal trigger -->
+            <div class="modal-trigger" id="weather" href="#modal1">
+                <canvas id="icon" width="40" height="40"></canvas>
+            </div>
+            <!-- weather modal structure -->
+            <div id="modal1" class="modal">
+                <div class="full-modal">
+                    <div class="modal-content">
+                        <div id="weatherIcon"></div>
+                        <canvas id="icon2" width="75" height="75"></canvas>
+                    </div>
+                    <div class=container>
+                        <div id="day1">
+                            <canvas id="icon3" width="30" height="30"></canvas>
+                        </div>
+                        <div id="day2">
+                            <canvas id="icon4" width="30" height="30"></canvas>
+                        </div>
+                        <div id="day3">
+                            <canvas id="icon5" width="30" height="30"></canvas>
+                        </div>
+                        <div id="day4">
+                            <canvas id="icon6" width="30" height="30"></canvas>
+                        </div>
+                        <div id="day5">
+                            <canvas id="icon7" width="30" height="30"></canvas>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#!" class="modal-close waves-effect waves-green btn-flat"><i class="material-icons">close</i></a>
+                    </div>
                 </div>
             </div>
+            <!-- clock appears here -->
+            <div id="time">
+                
+            </div>
+
+            <!-- button to trigger event list modal -->
+            <a id="eventsTrigger" class="waves-effect waves-light btn deep-orange modal-trigger" href="#eventsModal">View Events Near You</a>
+            <!-- event list appears here -->
+            <div id="eventsModal" class="modal">
+                <div class="full-modal">
+                    <div class="modal-content">
+                        <h5 class="eventsModalTitle">Events Near You</h5>
+                    </div>
+                    <div class= "container">
+                            <div id="events"></div>
+                    </div>
+                    <div id="eventsModalFooter" class="modal-footer">
+                        <a href="#!" class="modal-close btn-flat"><i class="material-icons">close</i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- quote appears here -->
+            <div id="quote"></div>
+
+        <!-- closing container div below -->
         </div>
-
-        <!-- quote appears here -->
-        <div id="quote"></div>
-
-    <!-- closing container div below -->
-    </div>
+        <!-- closing sign in container div -->
+        </div>
 </body>
-
+<script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAbdzfzFbNSIBfL01hse9J4ENl56uX1YOk",
+    authDomain: "myday-cb369.firebaseapp.com",
+    databaseURL: "https://myday-cb369.firebaseio.com",
+    projectId: "myday-cb369",
+    storageBucket: "myday-cb369.appspot.com",
+    messagingSenderId: "71019747566"
+  };
+  firebase.initializeApp(config);
+</script>
 <!-- Materialize JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
 <!-- Skycons JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/skycons/1396634940/skycons.js"></script>
-<!-- custom JS -->
-<script src="assets/javascript/app.js"></script>
+
 </body>
 
 </html>
