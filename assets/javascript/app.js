@@ -56,6 +56,7 @@ $(document).ready( function(){
             console.log(lat, long)
 
             // grabbing list of local events from eventbrite
+            // this seems to break when there's no image for an event
             var token = '6A7TOLR2YF2M2YFHJDWA';
             var $events = $("#events");
             
@@ -63,14 +64,16 @@ $(document).ready( function(){
                 console.log(res);
                 if (res.events.length) {
                     var eventList = `<ul class='eventList'>`;
-                    for (var i=0;i<res.events.length;i++) {
+                    for (var i = 0; i < res.events.length; i++) {
+                        // limiting event list to 5
+                        res.events.length = 5;
                         var event = res.events[i];
                         console.dir(event);
 
                         eventList += `<li><div class="col s12 m6">
                         <div class="card sticky-action style="overflow:visible;">
                         <div class="card-image waves-effect waves-block waves-light">
-                            <img class="activator" src="`+event.logo.url+`">
+                            <img class="activator" src="`+ event.logo.url +`">
                             <span class="card-title"></span>
                         </div>
                         <div class="card-content">
@@ -88,7 +91,12 @@ $(document).ready( function(){
                         </div>
                     </div></li>`;
 
-                        // eventList += "<li><a href='" + event.url + "'>" + event.name.text + "</a> - " + event.description.text + "</li>";
+                    // if (event.logo.url === null) {
+                    //     $('.activator').attr('src', 'https://logoeps.com/wp-content/uploads/2012/10/eventbrite-logo-vector.png');
+                    // }
+
+                    // the event times need to be converted to an unstandable format
+
                     }
                     eventList += `</ul>`;
                     $events.html(eventList);

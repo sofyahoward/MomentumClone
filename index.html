@@ -50,18 +50,35 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">X</a>
+                    <a href="#!" class="modal-close waves-effect waves-green btn-flat"><i class="material-icons">close</i></a>
                 </div>
             </div>
         </div>
         <!-- clock appears here -->
         <div id="time"></div>
 
-        <!-- event list here -->
-        <div id="events" class="row"></div>
+        <!-- button to trigger event list modal -->
+        <a id="eventsTrigger" class="waves-effect waves-light btn deep-orange modal-trigger" href="#eventsModal">View Events Near You</a>
+        <!-- event list appears here -->
+        <div id="eventsModal" class="modal">
+            <div class="full-modal">
+                <div class="modal-content">
+                    <p>Events Near You</p>
+                </div>
+                <div class= "container">
+                        <div id="events"></div>
+                </div>
+                <div id="eventsModalFooter" class="modal-footer">
+                    <a href="#!" class="modal-close btn-flat"><i class="material-icons">close</i></a>
+                </div>
+            </div>
+        </div>
 
         <!-- quote appears here -->
         <div id="quote"></div>
+
+    <!-- closing container div below -->
+    </div>
 </body>
 
 <!-- Materialize JS -->

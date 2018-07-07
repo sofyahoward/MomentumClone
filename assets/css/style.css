@@ -182,9 +182,21 @@ input.gsc-input {
 .gsc-input {
     text-indent: 5px;
 }
-/* #events {
-    background-color: white;
-} */
+
+/* EVENTS */
+#eventsTrigger {
+    position: fixed;
+    left: 50%;
+    top: 67.5%;
+    transform: translate(-50%, -50%);
+    min-width: 210px;
+}
+#eventsModal, #eventsModalFooter {
+    background-color: rgba(1, 11, 28, 0.5);
+}
+#eventsModalFooter .material-icons {
+    color: white;
+}
 
 
 
