@@ -23,7 +23,7 @@ body{
     text-align: center;
     transform: translate(-50%, -50%);
     cursor: pointer;
-    background-color: rgb(1, 11, 28, 0.5);
+    background-color: rgba(1, 11, 28, 0.65);
     color:#eff2f7;
     border-radius: 15px;
     height: fit-content;
@@ -72,7 +72,7 @@ canvas {
     top: 5%;
     text-align: center;
     transform: translate(-50%, -50%);
-    background-color: rgb(1, 11, 28, 0.5);
+    background-color: rgba(1, 11, 28, 0.65);
     color:#eff2f7;
     border-radius: 5px;
 }
@@ -85,7 +85,7 @@ canvas {
     transform: translate(-50%, -50%);
     font-size: 15vh; 
     color: white;
-    background-color: rgb(1, 11, 28, 0.5);
+    background-color: rgba(1, 11, 28, 0.65);
     border-radius: 20px;
     padding: 0 1.75rem 0 1.75rem;
 }
@@ -96,14 +96,14 @@ canvas {
     left: 50%;
     padding-right: 2%;
     transform: translate(-50%, -50%);
-    background-color: rgb(1, 11, 28, 0.5);
+    background-color: rgba(1, 11, 28, 0.65);
     height: fit-content;
     text-align: center;
     font-size: 2.5vh;
     border-radius: 20px;
 }
 blockquote{
-    border-left: rgb(245,245,245, 0.7) !important;
+    border-left: rgba(245,245,245, 0.7) !important;
 }
 #author{
     text-align: right;
@@ -144,7 +144,7 @@ td .gsc-input{
     width: 15px;
 }
 div #gsc-iw-id1{
-    background: rgb(1, 11, 28, 0.5) !important;
+    background: rgba(1, 11, 28, 0.65) !important;
     border-bottom: 5px white !important;
 }
 div #gsc-iw-id1 .gsc-input-box{
@@ -191,8 +191,11 @@ input.gsc-input {
     transform: translate(-50%, -50%);
     min-width: 210px;
 }
+.eventsModalTitle {
+    color: white;
+}
 #eventsModal, #eventsModalFooter {
-    background-color: rgba(1, 11, 28, 0.5);
+    background-color: rgba(1, 11, 28, 0.65);
 }
 #eventsModalFooter .material-icons {
     color: white;
