@@ -67,17 +67,23 @@ $(document).ready( function(){
                         var event = res.events[i];
                         console.dir(event);
 
-                        eventList += `<li><div class="col s12 m7">
-                        <div class="card">
-                        <div class="card-image">
-                            <img src="images/sample-1.jpg">
-                            <span class="card-title">`+event.name.text+`</span>
+                        eventList += `<li><div class="col s12 m6">
+                        <div class="card sticky-action style="overflow:visible;">
+                        <div class="card-image waves-effect waves-block waves-light">
+                            <img class="activator" src="`+event.logo.url+`">
+                            <span class="card-title"></span>
                         </div>
                         <div class="card-content">
-                            <p>`+event.description+`</p>
+                        <span class="card-title activator grey-text text-darken-4">`+event.name.text+`<i class="material-icons right">more_vert</i></span>
+                            <p><a target="_blank" href="#">`+event.venue.address.localized_address_display+`</a></p>
                         </div>
                         <div class="card-action">
-                            <a href="`+event.url+`">Register</a>
+                            <p>`+event.start.local+ " to " +event.end.local+`</p>
+                            <a target="_blank" href="`+event.url+`">Register [icon here]</a>
+                        </div>
+                        <div class="card-reveal">
+                            <span class="card-title grey-text text-darken-4">`+event.name.text+`<i class="material-icons right">close</i></span>
+                            <p>`+event.description.text+`</p>
                         </div>
                         </div>
                     </div></li>`;
