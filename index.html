@@ -22,11 +22,11 @@
             <gcse:search></gcse:search>
         </div>
         <!-- weather modal trigger -->
-        <div class="modal-trigger" id="weather" href="#modal1">
+        <div class="modal-trigger" id="weather" href="#weatherModal">
             <canvas id="icon" width="40" height="40"></canvas>
         </div>
         <!-- weather modal structure -->
-        <div id="modal1" class="modal">
+        <div id="weatherModal" class="modal">
             <div class="full-modal">
                 <div class="modal-content">
                     <div id="weatherIcon"></div>
@@ -50,43 +50,61 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a href="#!" class="modal-close waves-effect waves-green btn-flat"><i class="material-icons">close</i></a>
+                    <a href="#!" class="modal-close waves-effect waves-light btn-flat"><i class="material-icons">close</i></a>
                 </div>
             </div>
         </div>
         <!-- clock appears here -->
         <div id="time"></div>
-
-        <!-- button to trigger event list modal -->
-        <a id="eventsTrigger" class="waves-effect waves-light btn deep-orange modal-trigger" href="#eventsModal">View Events Near You</a>
-        <!-- event list appears here -->
-        <div id="eventsModal" class="modal">
-            <div class="full-modal">
-                <div class="modal-content">
-                    <h5 class="eventsModalTitle">Events Near You</h5>
+        
+        <!-- button to trigger tabs modal -->
+        <a id="myDayTrigger" class="waves-effect waves-light btn modal-trigger" href="#myDayModal">My Day</a>
+        
+        <!-- swipeable tabs -->
+        <div id="myDayModal" class="modal">
+            <div class="modal-content">
+                 <ul id="tabs-swipe-demo" class="tabs">
+                    <li class="tab col s3"><a class="active waves-effect" href="#test-swipe-1">News</a></li>
+                    <li class="tab col s3"><a class="waves-effect" href="#test-swipe-2">Events</a></li>
+                    <li class="tab col s3"><a class="waves-effect" href="#test-swipe-3">Take a Note</a></li>
+                    <!-- need a close button up here in the far right corner -->
+                </ul>                
+                <div id="test-swipe-1" class="col s12 blue">
+                    News goes here
                 </div>
-                <div class= "container">
+                <div id="test-swipe-2" class="col s12 carousel-item">
+                    <div class="container">
                         <div id="events"></div>
+                    </div>
                 </div>
-                <div id="eventsModalFooter" class="modal-footer">
-                    <a href="#!" class="modal-close btn-flat"><i class="material-icons">close</i></a>
+                <div id="test-swipe-3" class="col s12 green carousel-item">
+                    note-taking goes here
                 </div>
-            </div>
+            </div> <!-- closing modal content div -->
         </div>
-
+            
         <!-- quote appears here -->
         <div id="quote"></div>
+        
 
-    <!-- closing container div below -->
-    </div>
-</body>
 
-<!-- Materialize JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
-<!-- Skycons JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/skycons/1396634940/skycons.js"></script>
-<!-- custom JS -->
-<script src="assets/javascript/app.js"></script>
+
+
+
+
+
+
+
+
+        </div> <!-- closing container div -->
+    </body>
+    
+    <!-- Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+    <!-- Skycons JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/skycons/1396634940/skycons.js"></script>
+    <!-- custom JS -->
+    <script src="assets/javascript/features.js"></script>
 </body>
 
 </html>

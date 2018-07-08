@@ -13,6 +13,12 @@ $(document).ready( function(){
     // weather modal
     $('.modal').modal();
 
+    // swipeable tabs
+    $('ul.tabs').tabs({
+        // swipeable : true,
+        // responsiveThreshold : 1920
+      });
+
     // show real time
     function checkTime(i) {
         if (i < 10) {
@@ -78,11 +84,11 @@ $(document).ready( function(){
                         </div>
                         <div class="card-content">
                         <span class="card-title activator grey-text text-darken-4">`+event.name.text+`<i class="material-icons right">more_vert</i></span>
-                            <p><a target="_blank" href="#">`+event.venue.address.localized_address_display+`</a></p>
+                            <p><a class="eventAddress" target="_blank" href="#">`+event.venue.address.localized_address_display+`</a></p>
                         </div>
                         <div class="card-action">
                             <p>`+event.start.local+ " to " +event.end.local+`</p>
-                            <a target="_blank" href="`+event.url+`">Register [icon here]</a>
+                            <a id="eventLink" target="_blank" href="`+event.url+`">Register <i class="material-icons md-16">open_in_new</i></a>
                         </div>
                         <div class="card-reveal">
                             <span class="card-title grey-text text-darken-4">`+event.name.text+`<i class="material-icons right">close</i></span>
@@ -90,10 +96,6 @@ $(document).ready( function(){
                         </div>
                         </div>
                     </div></li>`;
-
-                    // if (event.logo.url === null) {
-                    //     $('.activator').attr('src', 'https://logoeps.com/wp-content/uploads/2012/10/eventbrite-logo-vector.png');
-                    // }
 
                     // the event times need to be converted to an unstandable format
 
@@ -146,7 +148,7 @@ $(document).ready( function(){
                     $("#weatherIcon").append("You are in " + data.zip + "<br>" + "Current temperature is " + res.currently.temperature + '<br>' + "It is " + res.currently.summary + "<br>" + "It feels like " + res.currently.apparentTemperature + "<br>");
                     //add to skyicons the weather information
                     var skycons = new Skycons({
-                        "color": "#a0c7db",
+                        "color": "#f4511e",
                     });
 
                     skycons.add(document.getElementById("icon"), res.currently.icon);

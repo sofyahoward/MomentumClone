@@ -1,10 +1,17 @@
-body{
+body {
     margin: 0;
     height: 100%;
 }
 
-/* DIV THAT CONTAINS THE IMAGE */
-#container{
+/* MATERIAL DESIGN ICONS SIZING */
+.material-icons.md-16 { font-size: 16px; }
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+/* DIV THAT CONTAINS THE RANDOMLY GENERATED BACKGROUND IMAGE */
+#container {
    width:100%;
    height:100%;
    background:url("https://source.unsplash.com/random?nature") no-repeat center center fixed;
@@ -15,7 +22,7 @@ body{
 }
 
 /* THE WEATHER DIV BEFORE CLICKING */
-#weather{
+#weather {
     padding: 1%;
     position: fixed;
     left: 92%;
@@ -29,44 +36,45 @@ body{
     height: fit-content;
     margin-top: 3%;
 }
-.modal-content{
+.full-modal > .modal-content {
     display: flex;
 }
-#weatherIcon{
+#weatherIcon {
     width: 60%;
 }
 canvas {
     display: flex;
     align-items: center;
 }
-#icon2{
-    color: #8fbed6 !important;
+#icon2 {
+    /* the color of the icons is in the js file on line 151 */
+    /* color: #f4511e !important; */
     display: flex !important;
     padding-left: 10%;
     align-items: center !important;
     justify-content: center;
 }
-#icon{
+#icon {
     margin-top: 3%;
     margin-bottom: 3%;
     margin-left: 25%;
 }
 
-.container{
+.container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
-#modal1{
+#weatherModal {
     position: absolute;
     margin-right: 7%;
     width: 25%;
     width: 400px;
 }
 
-#language{
+#language {
     position: absolute;
     left: 50%;
     top: 5%;
@@ -78,7 +86,7 @@ canvas {
 }
 
 /* THE CLOCK CONTAINER */
-#time{
+#time {
     position: fixed;
     left: 50%;
     top: 45%;
@@ -89,7 +97,7 @@ canvas {
     border-radius: 20px;
     padding: 0 1.75rem 0 1.75rem;
 }
-#quote{
+#quote {
     color:#eff2f7;
     position: fixed;
     top: 87%;
@@ -102,10 +110,10 @@ canvas {
     font-size: 2.5vh;
     border-radius: 20px;
 }
-blockquote{
+blockquote {
     border-left: rgba(245,245,245, 0.7) !important;
 }
-#author{
+#author {
     text-align: right;
     padding-right: 3%;
     height: fit-content;
@@ -126,15 +134,15 @@ blockquote{
   :-moz-placeholder { /* Firefox 18- */
     content: 'Search Google';
   }
-div .gsc-control-cse{
+div .gsc-control-cse {
     width: 30%;
     background: transparent;
     border: none;
 }
-table .gsc-search-box{
+table .gsc-search-box {
     border: none;
 }
-td .gsc-input{
+td .gsc-input {
     background: transparent !important;
 }
 .gsc-search-button-v2, .gsc-search-button-v2:hover, .gsc-search-button-v2:focus {
@@ -143,14 +151,14 @@ td .gsc-input{
     font-size: 15px;
     width: 15px;
 }
-div #gsc-iw-id1{
+div #gsc-iw-id1 {
     background: rgba(1, 11, 28, 0.65) !important;
     border-bottom: 5px white !important;
 }
-div #gsc-iw-id1 .gsc-input-box{
+div #gsc-iw-id1 .gsc-input-box {
     border:none;
 }
-table #gs50_id50.gstl_50{
+table #gs50_id50.gstl_50 {
     border-bottom: 5px white !important;
 }
 table .gsc-search-box{
@@ -165,7 +173,7 @@ div .gsc-control-wrapper-cse > table .gsc-search-box {
 .cse input.gsc-input {
     background-image:none !important;
 }
-input #gsc-i-id1 .gsc-input{
+input #gsc-i-id1 .gsc-input {
     background-image:none !important;
 }
 .gsc-input-box {
@@ -176,7 +184,7 @@ input.gsc-input {
     background: none;
     background-image:none !important;
  }
-.gsst_a .gscb_a{
+.gsst_a .gscb_a {
     color: white !important;
 }
 .gsc-input {
@@ -184,21 +192,41 @@ input.gsc-input {
 }
 
 /* EVENTS */
-#eventsTrigger {
+#myDayTrigger {
     position: fixed;
     left: 50%;
-    top: 67.5%;
+    top: 67%;
     transform: translate(-50%, -50%);
-    min-width: 210px;
+    min-width: 100px;
+    background-color: #f4511e;
 }
-.eventsModalTitle {
+#events a:hover {
+    text-decoration: underline;
+} 
+.btn-flat:hover, #myDayTrigger:hover, #events .btn-flat:hover {
+    background-color: #511ef4;
     color: white;
 }
-#eventsModal, #eventsModalFooter {
+#myDayModal {
     background-color: rgba(1, 11, 28, 0.65);
 }
-#eventsModalFooter .material-icons {
+/* #theHapsFooter .material-icons, .eventsModalTitle {
     color: white;
+} */
+#tabs-swipe-demo > li > a {
+    color: white;
+}
+.tabs .tab a:focus, .tabs .tab a:focus.active, .tabs {
+    background-color: rgba(81, 30, 244, 0.2);
+}
+/* #theHapsFooter {
+    background-color: transparent;
+} */
+.eventAddress {
+    color: #511ef4;
+}
+#eventLink {
+    color: #f4511e;
 }
 
 
