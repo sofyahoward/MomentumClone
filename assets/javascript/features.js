@@ -143,11 +143,12 @@ $(document).ready( function(){
 
                     // animated weather icons
                     $("#weatherIcon").append("You are in " + data.zip + "<br>" + "Current temperature is " + res.currently.temperature + '<br>' + "It is " + res.currently.summary + "<br>" + "It feels like " + res.currently.apparentTemperature + "<br>");
+                    
                     //add to skyicons the weather information
                     var skycons = new Skycons({
                         "color": "#f4511e",
                     });
-
+                    
                     skycons.add(document.getElementById("icon"), res.currently.icon);
                     skycons.add(document.getElementById("icon2"), res.currently.icon);
                     skycons.add(document.getElementById("icon3"), res.daily.data[1].icon);
@@ -159,19 +160,8 @@ $(document).ready( function(){
                     //start animation for weather icons
                     skycons.play();
                 }
-            });
-        });
-
-
-
-        
-		
-       
-            
-            
-    
-
-
+            }); // closing darksky API call
+        }); // closing get for geolocation
 
     // changing google searchbar placeholder text
     // this is not working :(
