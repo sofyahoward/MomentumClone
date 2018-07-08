@@ -2,15 +2,14 @@ body {
     margin: 0;
     height: 100%;
 }
-
-/* MATERIAL DESIGN ICONS SIZING */
+/* MATERIAL DESIGN ICONS SIZING *************************************************/
 .material-icons.md-16 { font-size: 16px; }
 .material-icons.md-18 { font-size: 18px; }
 .material-icons.md-24 { font-size: 24px; }
 .material-icons.md-36 { font-size: 36px; }
 .material-icons.md-48 { font-size: 48px; }
 
-/* DIV THAT CONTAINS THE RANDOMLY GENERATED BACKGROUND IMAGE */
+/* DIV THAT CONTAINS THE RANDOMLY GENERATED BACKGROUND IMAGE ************************/
 #container {
    width:100%;
    height:100%;
@@ -20,8 +19,7 @@ body {
    background-position:center center;
    position: fixed;
 }
-
-/* THE WEATHER DIV BEFORE CLICKING */
+/* THE WEATHER DIV BEFORE CLICKING *************************************************/
 #weather {
     padding: 1%;
     position: fixed;
@@ -59,21 +57,18 @@ canvas {
     margin-bottom: 3%;
     margin-left: 25%;
 }
-
 .container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
 }
-
 #weatherModal {
     position: absolute;
     margin-right: 7%;
     width: 25%;
     width: 400px;
 }
-
 #language {
     position: absolute;
     left: 50%;
@@ -84,8 +79,7 @@ canvas {
     color:#eff2f7;
     border-radius: 5px;
 }
-
-/* THE CLOCK CONTAINER */
+/* THE CLOCK CONTAINER *************************************************/
 #time {
     position: fixed;
     left: 50%;
@@ -119,21 +113,20 @@ blockquote {
     height: fit-content;
     font-size: 2vh;
 }
-
-/* GOOGLE SEARCH */
+/* GOOGLE SEARCH *************************************************/
 /* this is not working either :( */
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
     content: 'Search Google';
-  }
-  ::-moz-placeholder { /* Firefox 19+ */
+}
+::-moz-placeholder { /* Firefox 19+ */
     content: 'Search Google';
-  }
-  :-ms-input-placeholder { /* IE 10+ */
+}
+:-ms-input-placeholder { /* IE 10+ */
     content: 'Search Google';
-  }
-  :-moz-placeholder { /* Firefox 18- */
+}
+:-moz-placeholder { /* Firefox 18- */
     content: 'Search Google';
-  }
+}
 div .gsc-control-cse {
     width: 30%;
     background: transparent;
@@ -167,7 +160,8 @@ table .gsc-search-box{
 div .gsc-control-wrapper-cse > table .gsc-search-box {
     border-collapse: none !important;
 }
-/* table{
+/* this wasn't doing anything
+ table {
     border-collapse:  !important;
 } */
 .cse input.gsc-input {
@@ -190,8 +184,7 @@ input.gsc-input {
 .gsc-input {
     text-indent: 5px;
 }
-
-/* EVENTS */
+/* EVENTS *********************************************************************/
 #myDayTrigger {
     position: fixed;
     left: 50%;
