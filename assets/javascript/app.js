@@ -171,8 +171,7 @@ function logout(){
     $("#searchBar").hide();
     $("#eventsTrigger").hide();
     $("#quote").hide();
-};
-
+}; // closing logout function
 
 $(document).ready( function() {
     $("#time").hide();
@@ -180,16 +179,4 @@ $(document).ready( function() {
     $("#searchBar").hide();
     $("#eventsTrigger").hide();
     $("#quote").hide();
-
-    // // google searchbar
-    // (function () {
-    //     var cx = '014280645296093928214:imfnxx30oyo';
-    //     var gcse = document.createElement('script');
-    //     gcse.type = 'text/javascript';
-    //     gcse.async = true;
-    //     gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
-    //     var s = document.getElementsByTagName('script')[0];
-    //     s.parentNode.insertBefore(gcse, s);
-    // })();
-
 }); // closing ready function
