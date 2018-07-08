@@ -95,6 +95,7 @@ firebase.auth().createUserWithEmailAndPassword(email, password)
             $("#searchBar").show();
             $("#eventsTrigger").show();
             $("#quote").show();
+            // $("#myDayTrigger").show();
 
             document.getElementById("user_div").style.display = "block";
             var user = firebase.auth().currentUser;
@@ -122,7 +123,7 @@ firebase.auth().signInWithEmailAndPassword(userEmail, userPass).catch(function(e
 });
 
 // control the state of the application and what is visible upon log in
-firebase.auth().onAuthStateChanged(function(user) {
+firebase.auth().onAuthStateChanged( function(user) {
     if (user) {
         console.log(user.uid);
         document.getElementById("user_div").style.display = "block";
@@ -133,6 +134,7 @@ firebase.auth().onAuthStateChanged(function(user) {
         $("#searchBar").show();
         $("#eventsTrigger").show();
         $("#quote").show();
+        // $("myDayTrigger").show();
 
         var user = firebase.auth().currentUser;
         console.log(user.displayName);
@@ -140,11 +142,11 @@ firebase.auth().onAuthStateChanged(function(user) {
         if (user != null) {
             var email_id = user.email;
             var hour = new Date().getHours();
-            var greeting = "Good morning";
+            var greeting = "Good morning,";
             if(hour >= 12 && hour <= 17) {
-                greeting = "Good Afternoon";
+                greeting = "Good afternoon,";
             } else if(hour > 17 || hour < 5) {
-                greeting = "Good Evening"
+                greeting = "Good evening,"
             }
             document.getElementById('user_para').innerHTML=greeting + " " + ((user.displayName) ? user.displayName : "") ;
             console.log('hour', );
@@ -156,7 +158,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 // logout functionality
 function logout() {
     firebase.auth().signOut();
-    document.getElementById("email_field").value=' ';
+    document.getElementById("email_field").value='';
     document.getElementById("password_field").value='';
     document.getElementById("login_div").style.display = "none";
     $("#signUpOrLogin").show();
@@ -172,9 +174,11 @@ function logout() {
 }; // closing logout function
 
 $(document).ready( function() {
+    // hide all My Day features on default (not signed in)
     $("#time").hide();
     $("#weather").hide();
     $("#searchBar").hide();
     $("#eventsTrigger").hide();
     $("#quote").hide();
+    // $("#myDayTrigger").hide();
 }); // closing ready function

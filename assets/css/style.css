@@ -274,12 +274,12 @@ input {
     width: 98%;
     margin: 5%;
     padding: 20px;
-    /* font-family: 'Fira Mono', monospace; */
+    font-family: 'Fira Mono', monospace;
 }
 #signUpOrLogin #signUpBtn {
     width: 98%;
     margin: 5%;
-    /* font-family: 'Fira Mono', monospace; */
+    font-family: 'Fira Mono', monospace;
 }
 .loggedin-div {
     width: 20%;
@@ -344,6 +344,7 @@ border: 1px solid #999;
     -webkit-transition: 0.3s;
     padding: 15px;
     display: block;
+    font-family: 'Fira Mono', monospace;
 }
 #logoutButton {
     position: fixed;
