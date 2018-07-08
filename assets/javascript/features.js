@@ -14,10 +14,7 @@ $(document).ready( function(){
     $('.modal').modal();
 
     // swipeable tabs
-    $('ul.tabs').tabs({
-        // swipeable : true,
-        // responsiveThreshold : 1920
-      });
+    $('.tabs').tabs();
 
     // show real time
     function checkTime(i) {
