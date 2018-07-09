@@ -3,7 +3,7 @@ body {
     height: 100%;
     font-family: 'Fira Mono', monospace;
     padding: 0;
-    background: white;
+    background: black;
 }
 /* MATERIAL DESIGN ICONS SIZING *************************************************/
 .material-icons.md-16 { font-size: 16px; }
@@ -32,11 +32,15 @@ body {
     transform: translate(-50%, -50%);
     cursor: pointer;
     background-color: rgba(1, 11, 28, 0.65);
-    color: #eff2f7;
-    border-radius: 15px;
+    color: white;
+    border-radius: 5px;
     height: fit-content;
-    margin-top: 3%;
+    margin-top: 3.5%;
 }
+/* .full-modal, .modal-footer {
+    background-color: rgba(1, 11, 28, 0.65);
+    color: white;
+} */
 .full-modal > .modal-content {
     display: flex;
 }
@@ -54,6 +58,7 @@ canvas {
     padding-left: 10%;
     align-items: center !important;
     justify-content: center;
+    height: 75px;
 }
 #icon {
     margin-top: 3%;
@@ -79,7 +84,7 @@ canvas {
     text-align: center;
     transform: translate(-50%, -50%);
     background-color: rgba(1, 11, 28, 0.65);
-    color:#eff2f7;
+    color: white;
     border-radius: 5px;
 }
 /* THE CLOCK CONTAINER *************************************************/
@@ -88,24 +93,23 @@ canvas {
     left: 50%;
     top: 45%;
     transform: translate(-50%, -50%);
-    font-size: 15vh;
+    font-size: 4.5rem;
     color: white;
     background-color: rgba(1, 11, 28, 0.65);
-    border-radius: 20px;
-    padding: 0 1.75rem 0 1.75rem;
+    border-radius: 5px;
+    padding: 0 1.25rem 0 1.25rem;
 }
 #quote {
-    color:#eff2f7;
+    color: white;
     position: fixed;
     top: 87%;
     left: 50%;
-    padding-right: 2%;
+    padding-right: 1rem;
     transform: translate(-50%, -50%);
     background-color: rgba(1, 11, 28, 0.65);
     height: fit-content;
-    text-align: center;
-    font-size: 2.5vh;
-    border-radius: 20px;
+    text-align: left;
+    border-radius: 5px;
 }
 blockquote {
     border-left: rgba(245, 245, 245, 0.7) !important;
@@ -193,15 +197,24 @@ input.gsc-input {
     left: 50%;
     top: 67%;
     transform: translate(-50%, -50%);
-    min-width: 100px;
-    background-color: #f4511e;
+    width: 100px;
+    /* background-color: #f4511e; */
 }
 #events a:hover {
     text-decoration: underline;
 }
-.btn-flat:hover, #myDayTrigger:hover, #events .btn-flat:hover {
+.btn:not(#signUpBtn) {
+    background-color: #f4511e;
+}
+ .btn:hover:not(#signUpBtn), .btn-flat:hover {
     background-color: #511ef4;
     color: white;
+}
+#signUpBtn {
+    background-color: #511ef4;
+}
+#signUpBtn:hover {
+    background-color: #f4511e;
 }
 #myDayModal {
     background-color: rgba(1, 11, 28, 0.65);
@@ -239,17 +252,18 @@ input.gsc-input {
     position: fixed;
     left: 50%;
     top: 45%;
-    text-align: center;
+    /* text-align: center; */
     transform: translate(-50%, -50%);
-    cursor: pointer;
-    background-color: rgb(1, 11, 28, 0.7);
-    color:#eff2f7;
-    border-radius: 10px;
-    height: fit-content;
+    /* background-color: rgb(1, 11, 28, 0.65); */
+    /* border-radius: 5px; */
+    /* height: fit-content; */
     margin-top: 3%;
-    display: flex;
-    flex-direction: row;
-    width: 45%;
+    /* display: flex; */
+    /* flex-direction: row; */
+    /* width: 45%; */
+ }
+ #loginBtn {
+     margin-right: 2rem;
  }
  #signUpBackground, #logInBackground {
     padding: 1%;
@@ -259,9 +273,9 @@ input.gsc-input {
     text-align: center;
     transform: translate(-50%, -50%);
     cursor: pointer;
-    background-color: rgb(1, 11, 28, 0.7);
-    color:#eff2f7;
-    border-radius: 10px;
+    background-color: rgb(1, 11, 28, 0.65);
+    color: white;
+    border-radius: 5px;
     height: fit-content;
     margin-top: 3%;
     width: 45%;
@@ -269,17 +283,6 @@ input.gsc-input {
  }
 input {
     color: white;
-}
-#signUpOrLogin #loginBtn {
-    width: 98%;
-    margin: 5%;
-    padding: 20px;
-    font-family: 'Fira Mono', monospace;
-}
-#signUpOrLogin #signUpBtn {
-    width: 98%;
-    margin: 5%;
-    font-family: 'Fira Mono', monospace;
 }
 .loggedin-div {
     width: 20%;
@@ -295,7 +298,7 @@ input {
     display: block;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background: #fff;
+    background: white;
     padding: 15px;
     outline: none;
     width: 94%;
@@ -306,7 +309,7 @@ input {
     display: block;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background: #fff;
+    background: white;
     padding: 25px !important;
     outline: none;
     width: 97% !important;
@@ -317,7 +320,7 @@ input {
     display: block;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background: #fff;
+    background: white;
     padding: 0px !important;
     outline: none;
     width: 97%;
@@ -332,20 +335,6 @@ input {
 .main-div input:focus {
 border: 1px solid #999;
 }
-#logInButton, #signUpButton, #signUpOrLogin button, #signup_div button {
-    background: #fff;
-    color: #5d8ffc;
-    border: 1px solid #5d8ffc;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-left: 25%;
-    width: 50%;
-    transition: 0.3s;
-    -webkit-transition: 0.3s;
-    padding: 15px;
-    display: block;
-    font-family: 'Fira Mono', monospace;
-}
 #logoutButton {
     position: fixed;
     margin-left: 67%;
@@ -358,7 +347,7 @@ border: 1px solid #999;
     border-radius:10px;
 }
 #logoutButton:hover {
-    background-color: rgb(0,21,29, 0.7);
+    background-color: rgb(0, 21, 29, 0.7);
 }
 #user_div {
     width: 50%;
@@ -373,31 +362,16 @@ border: 1px solid #999;
     left: 50%;
     top: 20%;
     transform: translate(-50%, -50%);
-    font-size: 30px;
+    font-size: 1.5rem;
     color: white;
     background-color: rgba(1, 11, 28, 0.65);
-    border-radius: 20px;
-    padding: 0 1.75rem 0 1.75rem;
-    /* font-family: 'Philosopher', sans-serif;
-    font-size: 50px;
-    margin-bottom: 10%;
-    font-weight: 700;
-    color: white;
-    background-color:rgb(0,21,29, 0.7);
-    text-align: center;
-    height: 30%;
-    padding: 4%;
-    border-radius: 15px; */
+    border-radius: 5px;
+    padding: 0.25rem 1.25rem 0.25rem 1.25rem;
 }
-/* .welcomeText{
+.welcomeHeader, .welcomeText{
+    font-size: 1.5rem;
 }
-.welcomeHeader{
-} */
-#logInButton:hover, #signUpButton:hover, #signUpOrLogin :hover, #signup_div button:hover {
-    background: #5d8ffc;
-    color: #fff;
-    border: 1px solid #5d8ffc;
-}
+/* MEDIA QUERIES ***********************************************************/
 @media screen and (max-width: 480px) {
     #signUpOrLogin {
         flex-direction: column;

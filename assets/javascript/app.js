@@ -1,38 +1,41 @@
-function checkTime(i) {
-    if (i < 10) {
-        i = "0" + i;
-    }
-    return i;
-}
+// initializing moment.js
+moment().format();
+console.log("current time is " + moment().format("LT"));
 
-function getTime() {
-    var today = new Date();
-    var h = today.getHours();
-    var m = today.getMinutes();
-    // add a zero in front of numbers<10
-    m = checkTime(m);
-    return { hour: h, minute: m };
-}
-console.log(getTime());
+// function checkTime(i) {
+//     if (i < 10) {
+//         i = "0" + i;
+//     }
+//     return i;
+// }
 
-$(document).ready( function() {
+// fetching current time
+// function getTime() {
+//     var today = new Date();
+//     console.log();
+//     var h = today.getHours();
+//     var m = today.getMinutes();
+//     m = checkTime(m);
+//     return { hour: h, minute: m };
+// }
+// console.log(getTime());
 
-    // show real time
-    function startTime() {
+// $(document).ready( function() {
+//     // showing real time
+//     function startTime() {
+//         var today = new Date();
+//         var h = today.getHours();
+//         var m = today.getMinutes();
+//         m = checkTime(m);
 
-        var today = new Date();
-        var h = today.getHours();
-        var m = today.getMinutes();
-        // add a zero in front of numbers<10
-        m = checkTime(m);
-
-        document.getElementById('time').innerHTML = h + ":" + m;
-        t = setTimeout(function () {
-            startTime();
-        }, 500);
-    }
-    startTime();
-}); // closing ready function
+        // document.getElementById('time').innerHTML = h + ":" + m;
+        document.getElementById('time').innerHTML = moment().format("LT");
+//         t = setTimeout( function() {
+//             startTime();
+//         }, 500);
+//     }
+//     startTime();
+// }); // closing ready function
 
 // display login info upon click of the button
 function loginDisplay() {
@@ -41,6 +44,7 @@ function loginDisplay() {
     document.getElementById("signUpBtn").style.display = "none";
     $("#logInBackground").show();
     $("#signUpOrLogin").hide();
+    document.getElementById('myDayTrigger').style.display = "none";
 }
 // display signup info upon click of the button
 function signupDisplay() {
@@ -49,6 +53,7 @@ function signupDisplay() {
     document.getElementById("signUpBtn").style.display = "none";
     document.getElementById("signUpBackground").style.display = "block";
     $("#signUpOrLogin").hide();
+    document.getElementById('myDayTrigger').style.display = "none";
 }
 // sign up functionality
 function signUp() {
@@ -95,7 +100,7 @@ firebase.auth().createUserWithEmailAndPassword(email, password)
             $("#searchBar").show();
             $("#eventsTrigger").show();
             $("#quote").show();
-            // $("#myDayTrigger").show();
+            document.getElementById('myDayTrigger').style.display = "block";
 
             document.getElementById("user_div").style.display = "block";
             var user = firebase.auth().currentUser;
@@ -134,7 +139,7 @@ firebase.auth().onAuthStateChanged( function(user) {
         $("#searchBar").show();
         $("#eventsTrigger").show();
         $("#quote").show();
-        // $("myDayTrigger").show();
+        document.getElementById('myDayTrigger').style.display = "block";
 
         var user = firebase.auth().currentUser;
         console.log(user.displayName);
@@ -142,10 +147,13 @@ firebase.auth().onAuthStateChanged( function(user) {
         if (user != null) {
             var email_id = user.email;
             var hour = new Date().getHours();
-            var greeting = "Good morning,";
-            if(hour >= 12 && hour <= 17) {
+            // need condition for the wee hours of the morning
+            var greeting;
+            if (hour < 12) {
+                greeting = "Good morning,";
+            } else if (hour >= 12 && hour <= 17) {
                 greeting = "Good afternoon,";
-            } else if(hour > 17 || hour < 5) {
+            } else if (hour > 17 || hour < 5) {
                 greeting = "Good evening,"
             }
             document.getElementById('user_para').innerHTML=greeting + " " + ((user.displayName) ? user.displayName : "") ;
@@ -180,5 +188,5 @@ $(document).ready( function() {
     $("#searchBar").hide();
     $("#eventsTrigger").hide();
     $("#quote").hide();
-    // $("#myDayTrigger").hide();
+    document.getElementById('myDayTrigger').style.display = "none";
 }); // closing ready function

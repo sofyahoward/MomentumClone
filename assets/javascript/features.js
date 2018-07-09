@@ -1,3 +1,6 @@
+// initializing moment.js
+moment().format();
+
 $(document).ready( function(){
     // google searchbar
     (function () {
@@ -16,27 +19,6 @@ $(document).ready( function(){
     // swipeable tabs
     $('.tabs').tabs();
 
-    // show real time
-    function checkTime(i) {
-        if (i < 10) {
-            i = "0" + i;
-        }
-        return i;
-    }
-
-    function startTime() {
-        var today = new Date();
-        var h = today.getHours();
-        var m = today.getMinutes();
-        // add a zero in front of numbers<10
-        m = checkTime(m);
-        document.getElementById('time').innerHTML = h + ":" + m;
-        t = setTimeout(function () {
-            startTime();
-        }, 500);
-    }
-    startTime();
-
     // generate random quote
     // hold the link to the API endpoint
     var forismaticAPI = 'https://api.forismatic.com/api/1.0/?method=getQuote&format=jsonp&lang=en&jsonp=?';
@@ -53,7 +35,7 @@ $(document).ready( function(){
         var geoLocationAPI = "http://api.ipstack.com/170.140.105.75?access_key=0feabad0b36ed7c5509ef1acc3df509c"
         $.getJSON(geoLocationAPI, function (data) {
             $("#language").append(data.location.country_flag_emoji + "<br>" + data.location.languages[0].name)
-            $("#weather").append(data.zip + "<br>" + data.city + " " + data.region_name)
+            $("#weather").append(data.city + " " + data.region_name)
             var lat = data.latitude;
             var long = data.longitude;
             console.log(lat, long)
@@ -73,6 +55,9 @@ $(document).ready( function(){
                         var event = res.events[i];
                         console.dir(event);
 
+                        var startTime = moment(event.start.local).format("llll");
+                        var endTime = moment(event.end.local).format("LT");
+
                         eventList += `<li><div class="col s12 m6">
                         <div class="card sticky-action style="overflow:visible;">
                         <div class="card-image waves-effect waves-block waves-light">
@@ -84,7 +69,7 @@ $(document).ready( function(){
                             <p><a class="eventAddress" target="_blank" href="#">`+event.venue.address.localized_address_display+`</a></p>
                         </div>
                         <div class="card-action">
-                            <p>`+event.start.local+ " to " +event.end.local+`</p>
+                            <p>`+startTime+ " to " +endTime+`</p>
                             <a id="eventLink" target="_blank" href="`+event.url+`">Register <i class="material-icons md-16">open_in_new</i></a>
                         </div>
                         <div class="card-reveal">
@@ -134,7 +119,7 @@ $(document).ready( function(){
                     var dayOfWeek5 = convertedDate5.getDay();
 
                     // forecast
-                    var weekday = new Array("Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat")
+                    var weekday = new Array("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat")
                     $("#day1").append(weekday[dayOfWeek1] + "<br>" + (Math.round((res.daily.data[1].temperatureHigh + res.daily.data[1].temperatureLow) / 2) * 100) / 100);
                     $("#day2").append(weekday[dayOfWeek2] + "<br>" + (Math.round((res.daily.data[2].temperatureHigh + res.daily.data[2].temperatureLow) / 2) * 100) / 100);
                     $("#day3").append(weekday[dayOfWeek3] + "<br>" + (Math.round((res.daily.data[3].temperatureHigh + res.daily.data[3].temperatureLow) / 2) * 100) / 100);
@@ -142,7 +127,7 @@ $(document).ready( function(){
                     $("#day5").append(weekday[dayOfWeek5] + "<br>" + (Math.round((res.daily.data[5].temperatureHigh + res.daily.data[5].temperatureLow) / 2) * 100) / 100);
 
                     // animated weather icons
-                    $("#weatherIcon").append("You are in " + data.zip + "<br>" + "Current temperature is " + res.currently.temperature + '<br>' + "It is " + res.currently.summary + "<br>" + "It feels like " + res.currently.apparentTemperature + "<br>");
+                    $("#weatherIcon").append("You are in " + data.zip + "<br>" + "It's currently " + Math.round(res.currently.temperature) + "˚F" + '<br>' + "Weather is " + res.currently.summary + "<br>" + "Feels like " + Math.round(res.currently.apparentTemperature) + "˚F" + "<br>");
                     
                     //add to skyicons the weather information
                     var skycons = new Skycons({
