@@ -2,40 +2,40 @@
 moment().format();
 console.log("current time is " + moment().format("LT"));
 
-// function checkTime(i) {
-//     if (i < 10) {
-//         i = "0" + i;
-//     }
-//     return i;
-// }
+function checkTime(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}
 
 // fetching current time
-// function getTime() {
-//     var today = new Date();
-//     console.log();
-//     var h = today.getHours();
-//     var m = today.getMinutes();
-//     m = checkTime(m);
-//     return { hour: h, minute: m };
-// }
-// console.log(getTime());
+function getTime() {
+    var today = new Date();
+    console.log();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    m = checkTime(m);
+    return { hour: h, minute: m };
+}
+console.log(getTime());
 
-// $(document).ready( function() {
-//     // showing real time
-//     function startTime() {
-//         var today = new Date();
-//         var h = today.getHours();
-//         var m = today.getMinutes();
-//         m = checkTime(m);
+$(document).ready( function() {
+    // showing real time
+    function startTime() {
+        var today = new Date();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        m = checkTime(m);
 
         // document.getElementById('time').innerHTML = h + ":" + m;
         document.getElementById('time').innerHTML = moment().format("LT");
-//         t = setTimeout( function() {
-//             startTime();
-//         }, 500);
-//     }
-//     startTime();
-// }); // closing ready function
+        t = setTimeout( function() {
+            startTime();
+        }, 500);
+    }
+    startTime();
+}); // closing ready function
 
 // display login info upon click of the button
 function loginDisplay() {
