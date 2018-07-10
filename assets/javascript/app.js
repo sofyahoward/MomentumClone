@@ -76,16 +76,14 @@ firebase.auth().createUserWithEmailAndPassword(email, password)
           }
     user.updateProfile({
         displayName: username,
-   }).then(function(){
-    console.log(user.displayName)
    })
-   .catch(function(error) {
+   
+}).catch(function(error) {
     // handle errors here
     var errorCode = error.code;
     var errorMessage = error.message;
     $(".error").append("Error : "+ errorMessage)
-  });
-}); // closing user function
+  }); // closing user function
 
 // control the state of the application and what is visible upon sign in
     firebase.auth().onAuthStateChanged( function(user) {
@@ -116,6 +114,7 @@ firebase.auth().createUserWithEmailAndPassword(email, password)
 
 // login functionality
 function login() {
+    firebase.auth().signOut();
     var userEmail = document.getElementById("email_field").value;
     var userPass = document.getElementById("password_field").value;
 
@@ -123,6 +122,7 @@ firebase.auth().signInWithEmailAndPassword(userEmail, userPass).catch(function(e
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
+    window.alert(errorMessage);
     // ...
     $(".error").append(errorMessage);
 });
