@@ -1,11 +1,19 @@
-body{
+body {
     margin: 0;
     height: 100%;
     font-family: 'Fira Mono', monospace;
+    padding: 0;
+    background: black;
 }
+/* MATERIAL DESIGN ICONS SIZING *************************************************/
+.material-icons.md-16 { font-size: 16px; }
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
 
-/* DIV THAT CONTAINS THE IMAGE */
-/* #container{
+/* DIV THAT CONTAINS THE RANDOMLY GENERATED BACKGROUND IMAGE ************************/
+/* #container {
    width:100%;
    height:100%;
    background:url("https://source.unsplash.com/random?nature") no-repeat center center fixed;
@@ -14,9 +22,8 @@ body{
    background-position:center center;
    position: fixed;
 } */
-
-/* THE WEATHER DIV BEFORE CLICKING */
-#weather{
+/* THE WEATHER DIV BEFORE CLICKING *************************************************/
+#weather {
     padding: 1%;
     position: fixed;
     left: 92%;
@@ -25,117 +32,117 @@ body{
     transform: translate(-50%, -50%);
     cursor: pointer;
     background-color: rgba(1, 11, 28, 0.65);
-    color:#eff2f7;
-    border-radius: 15px;
+    color: white;
+    border-radius: 5px;
     height: fit-content;
-    margin-top: 3%;
+    margin-top: 3.5%;
 }
-.modal-content{
+/* .full-modal, .modal-footer {
+    background-color: rgba(1, 11, 28, 0.65);
+    color: white;
+} */
+.full-modal > .modal-content {
     display: flex;
 }
-#weatherIcon{
+#weatherIcon {
     width: 60%;
 }
 canvas {
     display: flex;
     align-items: center;
 }
-#icon2{
-    color: #8fbed6 !important;
+#icon2 {
+    /* the color of the icons is in the js file on line 151 */
+    /* color: #f4511e !important; */
     display: flex !important;
     padding-left: 10%;
     align-items: center !important;
     justify-content: center;
+    height: 75px;
 }
-#icon{
+#icon {
     margin-top: 3%;
     margin-bottom: 3%;
     margin-left: 25%;
 }
-
-.container{
+.container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
 }
-
-#modal1{
+#weatherModal {
     position: absolute;
     margin-right: 7%;
     width: 25%;
     width: 400px;
 }
-
-#language{
+#language {
     position: absolute;
     left: 50%;
     top: 5%;
     text-align: center;
     transform: translate(-50%, -50%);
     background-color: rgba(1, 11, 28, 0.65);
-    color:#eff2f7;
+    color: white;
     border-radius: 5px;
 }
-
-/* THE CLOCK CONTAINER */
-#time{
+/* THE CLOCK CONTAINER *************************************************/
+#time {
     position: fixed;
     left: 50%;
     top: 45%;
     transform: translate(-50%, -50%);
-    font-size: 15vh; 
+    font-size: 4.5rem;
     color: white;
     background-color: rgba(1, 11, 28, 0.65);
-    border-radius: 20px;
-    padding: 0 1.75rem 0 1.75rem;
+    border-radius: 5px;
+    padding: 0 1.25rem 0 1.25rem;
 }
-#quote{
-    color:#eff2f7;
+#quote {
+    color: white;
     position: fixed;
     top: 87%;
     left: 50%;
-    padding-right: 2%;
+    padding-right: 1rem;
     transform: translate(-50%, -50%);
     background-color: rgba(1, 11, 28, 0.65);
     height: fit-content;
-    text-align: center;
-    font-size: 2.5vh;
-    border-radius: 20px;
+    text-align: left;
+    border-radius: 5px;
 }
-blockquote{
-    border-left: rgba(245,245,245, 0.7) !important;
+blockquote {
+    border-left: rgba(245, 245, 245, 0.7) !important;
 }
-#author{
+#author {
     text-align: right;
     padding-right: 3%;
     height: fit-content;
     font-size: 2vh;
 }
-
-/* GOOGLE SEARCH */
+/* GOOGLE SEARCH *************************************************/
 /* this is not working either :( */
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
     content: 'Search Google';
-  }
-  ::-moz-placeholder { /* Firefox 19+ */
+}
+::-moz-placeholder { /* Firefox 19+ */
     content: 'Search Google';
-  }
-  :-ms-input-placeholder { /* IE 10+ */
+}
+:-ms-input-placeholder { /* IE 10+ */
     content: 'Search Google';
-  }
-  :-moz-placeholder { /* Firefox 18- */
+}
+:-moz-placeholder { /* Firefox 18- */
     content: 'Search Google';
-  }
-div .gsc-control-cse{
+}
+div .gsc-control-cse {
     width: 30%;
     background: transparent;
     border: none;
 }
-table .gsc-search-box{
+table .gsc-search-box {
     border: none;
 }
-td .gsc-input{
+td .gsc-input {
     background: transparent !important;
 }
 .gsc-search-button-v2, .gsc-search-button-v2:hover, .gsc-search-button-v2:focus {
@@ -144,14 +151,14 @@ td .gsc-input{
     font-size: 15px;
     width: 15px;
 }
-div #gsc-iw-id1{
+div #gsc-iw-id1 {
     background: rgba(1, 11, 28, 0.65) !important;
     border-bottom: 5px white !important;
 }
-div #gsc-iw-id1 .gsc-input-box{
+div #gsc-iw-id1 .gsc-input-box {
     border:none;
 }
-table #gs50_id50.gstl_50{
+table #gs50_id50.gstl_50 {
     border-bottom: 5px white !important;
 }
 table .gsc-search-box{
@@ -160,56 +167,78 @@ table .gsc-search-box{
 div .gsc-control-wrapper-cse > table .gsc-search-box {
     border-collapse: none !important;
 }
-/* table{
+/* this wasn't doing anything
+ table {
     border-collapse:  !important;
 } */
 .cse input.gsc-input {
     background-image:none !important;
 }
-input #gsc-i-id1 .gsc-input{
+input #gsc-i-id1 .gsc-input {
     background-image:none !important;
 }
 .gsc-input-box {
     border: none !important;
 }
-input.gsc-input { 
+input.gsc-input {
     color: white !important;
     background: none;
     background-image:none !important;
  }
-.gsst_a .gscb_a{
+.gsst_a .gscb_a {
     color: white !important;
 }
 .gsc-input {
     text-indent: 5px;
 }
-
-/* EVENTS */
-#eventsTrigger {
+/* TABS MODAL *********************************************************************/
+#myDayTrigger {
     position: fixed;
     left: 50%;
-    top: 67.5%;
+    top: 67%;
     transform: translate(-50%, -50%);
-    min-width: 210px;
+    width: 100px;
+    /* background-color: #f4511e; */
 }
-.eventsModalTitle {
+#events a:hover {
+    text-decoration: underline;
+}
+.btn:not(#signUpBtn) {
+    background-color: #f4511e;
+}
+ .btn:hover:not(#signUpBtn), .btn-flat:hover {
+    background-color: #511ef4;
     color: white;
 }
-#eventsModal, #eventsModalFooter {
+#signUpBtn {
+    background-color: #511ef4;
+}
+#signUpBtn:hover {
+    background-color: #f4511e;
+}
+#myDayModal {
     background-color: rgba(1, 11, 28, 0.65);
 }
-#eventsModalFooter .material-icons {
+/* #theHapsFooter .material-icons, .eventsModalTitle {
+    color: white;
+} */
+#tabs-swipe-demo > li > a {
     color: white;
 }
-
-
-body{
-    background: #fff;
-    padding: 0px;
-    margin: 0px;
+.tabs .tab a:focus, .tabs .tab a:focus.active, .tabs {
+    background-color: rgba(81, 30, 244, 0.2);
 }
-
-#containerSignIn{
+/* #theHapsFooter {
+    background-color: transparent;
+} */
+.eventAddress {
+    color: #511ef4;
+}
+#eventLink {
+    color: #f4511e;
+}
+/* LOGIN AND SIGN UP STUFF *********************************************************************/
+#containerSignIn {
     width:100%;
     height:100%;
     background:url("https://source.unsplash.com/random?nature") no-repeat center center fixed;
@@ -218,26 +247,25 @@ body{
     background-position:center center;
     position: fixed;
  }
-
- #signUpOrLogin{
+ #signUpOrLogin {
     padding: 5px;
     position: fixed;
     left: 50%;
     top: 45%;
-    text-align: center;
+    /* text-align: center; */
     transform: translate(-50%, -50%);
-    cursor: pointer;
-    background-color: rgb(1, 11, 28, 0.7);
-    color:#eff2f7;
-    border-radius: 10px;
-    height: fit-content;
+    /* background-color: rgb(1, 11, 28, 0.65); */
+    /* border-radius: 5px; */
+    /* height: fit-content; */
     margin-top: 3%;
-    display: flex;
-    flex-direction: row;
-    width: 45%;
+    /* display: flex; */
+    /* flex-direction: row; */
+    /* width: 45%; */
  }
-
- #signUpBackground, #logInBackground{
+ #loginBtn {
+     margin-right: 2rem;
+ }
+ #signUpBackground, #logInBackground {
     padding: 1%;
     position: fixed;
     left: 50%;
@@ -245,31 +273,18 @@ body{
     text-align: center;
     transform: translate(-50%, -50%);
     cursor: pointer;
-    background-color: rgb(1, 11, 28, 0.7);
-    color:#eff2f7;
-    border-radius: 10px;
+    background-color: rgb(1, 11, 28, 0.65);
+    color: white;
+    border-radius: 5px;
     height: fit-content;
     margin-top: 3%;
     width: 45%;
     display: none;
  }
-input{
+input {
     color: white;
 }
-
-#signUpOrLogin #loginBtn{
-    width: 98%;
-    margin: 5%;
-    padding: 20px;
-    font-family: 'Fira Mono', monospace;
-}
-#signUpOrLogin #signUpBtn{
-    width: 98%;
-    margin: 5%;
-    font-family: 'Fira Mono', monospace;
-}
-
- .loggedin-div{
+.loggedin-div {
     width: 20%;
     margin: 0px auto;
     margin-top: 150px;
@@ -277,24 +292,24 @@ input{
     top: 10%;
     position: fixed;
     left: 35%;
-    display: none; 
+    display: none;
 }
-.main-div input{
+.main-div input {
     display: block;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background: #fff;
+    background: white;
     padding: 15px;
     outline: none;
     width: 94%;
     margin-bottom: 20px;
     color: white;
 }
-#userName_fieldSignUp{
+#userName_fieldSignUp {
     display: block;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background: #fff;
+    background: white;
     padding: 25px !important;
     outline: none;
     width: 97% !important;
@@ -305,7 +320,7 @@ input{
     display: block;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background: #fff;
+    background: white;
     padding: 0px !important;
     outline: none;
     width: 97%;
@@ -313,29 +328,14 @@ input{
     color: black;
     padding-right: 2% !important;
 }
-
-.error{
+.error {
     color: rgb(255,87,97);
     height: 5%;
 }
 .main-div input:focus {
 border: 1px solid #999;
 }
-
-#logInButton, #signUpButton, #signUpOrLogin button, #signup_div button{
-    background: #fff;
-    color: #5d8ffc;
-    border: 1px solid #5d8ffc;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-left: 25%;
-    width: 50%;
-    transition: 0.3s;
-    -webkit-transition: 0.3s;
-    padding: 15px;
-    display: block;
-}
-#logoutButton{
+#logoutButton {
     position: fixed;
     margin-left: 67%;
     margin-top: -36%;
@@ -346,60 +346,39 @@ border: 1px solid #999;
     border: none;
     border-radius:10px;
 }
-
-#logoutButton:hover{
-    background-color: rgb(0,21,29, 0.7);
+#logoutButton:hover {
+    background-color: rgb(0, 21, 29, 0.7);
 }
-#user_div{
+#user_div {
     width: 50%;
     position: fixed;
     margin-top: 18%;
     margin-left: -15%;
     margin-right: 10%;
     /* transform: translate(-50%, -50%); */
-    
 }
-#user_para{
+#user_para {
     position: fixed;
     left: 50%;
     top: 20%;
     transform: translate(-50%, -50%);
-    font-size: 30px; 
+    font-size: 1.5rem;
     color: white;
     background-color: rgba(1, 11, 28, 0.65);
-    border-radius: 20px;
-    padding: 0 1.75rem 0 1.75rem;
-    /* font-family: 'Philosopher', sans-serif;
-    font-size: 50px;
-    margin-bottom: 10%;
-    font-weight: 700;
-    color: white;
-    background-color:rgb(0,21,29, 0.7);
-    text-align: center;
-    height: 30%;
-    padding: 4%;
-    border-radius: 15px; */
+    border-radius: 5px;
+    padding: 0.25rem 1.25rem 0.25rem 1.25rem;
 }
-.welcomeText{
-
+.welcomeHeader, .welcomeText{
+    font-size: 1.5rem;
 }
-.welcomeHeader{
-
-}
-
-#logInButton:hover, #signUpButton:hover, #signUpOrLogin :hover, #signup_div button:hover{
-    background: #5d8ffc;
-    color: #fff;
-    border: 1px solid #5d8ffc;   
-}
+/* MEDIA QUERIES ***********************************************************/
 @media screen and (max-width: 480px) {
     #signUpOrLogin {
         flex-direction: column;
         padding-right: 4%;
     }
-    #signUpBackground, #logInBackground{
+    #signUpBackground, #logInBackground {
         width: 95%;
         margin-top: 10%;
     }
 }
-
