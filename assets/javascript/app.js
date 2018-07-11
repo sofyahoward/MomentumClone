@@ -57,15 +57,33 @@ function signupDisplay() {
 }
 // sign up functionality
 function signUp() {
+    firebase.auth().signOut();
     var email = document.getElementById("email_fieldSignUp").value;
     var password = document.getElementById("password_fieldSignUp").value;
     var username = document.getElementById("userName_fieldSignUp").value;
 
+    function updateGreeting() {
+        var user = firebase.auth().currentUser;
+            var hour = new Date().getHours();
+                // need condition for the wee hours of the morning
+                var greeting;
+                if (hour < 12) {
+                    greeting = "Good morning,";
+                } else if (hour >= 12 && hour <= 17) {
+                    greeting = "Good afternoon,";
+                } else if (hour > 17 || hour < 5) {
+                    greeting = "Good evening,"
+                }
+            document.getElementById('user_para').innerHTML="hey there" + " " + ((user.displayName) ? user.displayName : "") ;
+            // console.log('hour', );
+            console.log(user.displayName);
+    }
 //create a user in firebase
 firebase.auth().createUserWithEmailAndPassword(email, password)
 //add a custom username to firebase
     .then(function(user) {
         var database = firebase.database();
+        console.log(JSON.stringify(user));
         var user = firebase.auth().currentUser;
         function writeUserData(userId, username, email, ) {
             firebase.database().ref('users/' + userId).set({
@@ -74,9 +92,11 @@ firebase.auth().createUserWithEmailAndPassword(email, password)
               userId: user.uid,
             });
           }
-    user.updateProfile({
-        displayName: username,
-   })
+    return user.updateProfile({
+            displayName: username,
+        }).then(function() {
+            updateGreeting();
+        });
    
 }).catch(function(error) {
     // handle errors here
@@ -87,7 +107,9 @@ firebase.auth().createUserWithEmailAndPassword(email, password)
 
 // control the state of the application and what is visible upon sign in
     firebase.auth().onAuthStateChanged( function(user) {
-
+        // console.log(user);
+        // console.log(username);
+        // console.log(user.displayName);
         if (user) {
             $("#signup_div").hide();
             $("#signUpBackground").hide();
@@ -101,12 +123,26 @@ firebase.auth().createUserWithEmailAndPassword(email, password)
             document.getElementById('myDayTrigger').style.display = "block";
 
             document.getElementById("user_div").style.display = "block";
-            var user = firebase.auth().currentUser;
-            
+            // var user = firebase.auth().currentUser;
+            console.log(JSON.stringify(user));
             if (user != null) {
                 var email_id = user.emailSignUp;
                 var name_id = userName_fieldSignUp;
-                document.getElementById('user_para').innerHTML="Welcome User: " + document.getElementById("userName_fieldSignUp").value;
+
+                updateGreeting();
+            // //     var hour = new Date().getHours();
+            // //     // need condition for the wee hours of the morning
+            // //     var greeting;
+            // //     if (hour < 12) {
+            // //         greeting = "Good morning,";
+            // //     } else if (hour >= 12 && hour <= 17) {
+            // //         greeting = "Good afternoon,";
+            // //     } else if (hour > 17 || hour < 5) {
+            // //         greeting = "Good evening,"
+            // //     }
+            // document.getElementById('user_para').innerHTML="hey there" + " " + ((user.displayName) ? user.displayName : "") ;
+            // // console.log('hour', );
+            // console.log(user.displayName);
             }
         }
     });
@@ -169,6 +205,7 @@ function logout() {
     document.getElementById("email_field").value='';
     document.getElementById("password_field").value='';
     document.getElementById("login_div").style.display = "none";
+    $("#signUpBackground").hide();
     $("#signUpOrLogin").show();
     $("#logInBackground").hide();
     $("#loginBtn").show();
@@ -179,6 +216,7 @@ function logout() {
     $("#searchBar").hide();
     $("#eventsTrigger").hide();
     $("#quote").hide();
+    $("#myDayTrigger").hide();
 }; // closing logout function
 
 $(document).ready( function() {
