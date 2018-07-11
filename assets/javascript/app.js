@@ -74,7 +74,7 @@ function signUp() {
                 } else if (hour > 17 || hour < 5) {
                     greeting = "Good evening,"
                 }
-            document.getElementById('user_para').innerHTML="hey there" + " " + ((user.displayName) ? user.displayName : "") ;
+            document.getElementById('user_para').innerHTML= greeting + " " + ((user.displayName) ? user.displayName : "") ;
             // console.log('hour', );
             console.log(user.displayName);
     }
@@ -130,19 +130,19 @@ firebase.auth().createUserWithEmailAndPassword(email, password)
                 var name_id = userName_fieldSignUp;
 
                 updateGreeting();
-            // //     var hour = new Date().getHours();
-            // //     // need condition for the wee hours of the morning
-            // //     var greeting;
-            // //     if (hour < 12) {
-            // //         greeting = "Good morning,";
-            // //     } else if (hour >= 12 && hour <= 17) {
-            // //         greeting = "Good afternoon,";
-            // //     } else if (hour > 17 || hour < 5) {
-            // //         greeting = "Good evening,"
-            // //     }
-            // document.getElementById('user_para').innerHTML="hey there" + " " + ((user.displayName) ? user.displayName : "") ;
-            // // console.log('hour', );
-            // console.log(user.displayName);
+                var hour = new Date().getHours();
+                // need condition for the wee hours of the morning
+                var greeting;
+                if (hour < 12) {
+                    greeting = "Good morning,";
+                } else if (hour >= 12 && hour <= 17) {
+                    greeting = "Good afternoon,";
+                } else if (hour > 17 || hour < 5) {
+                    greeting = "Good evening,"
+                }
+            document.getElementById('user_para').innerHTML= greeting + " " + ((user.displayName) ? user.displayName : "") ;
+            // console.log('hour', );
+            console.log(user.displayName);
             }
         }
     });

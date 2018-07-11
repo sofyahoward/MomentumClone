@@ -289,6 +289,13 @@ input.gsc-input {
 input {
     color: white;
 }
+#deleteItemBtn{
+    position: fixed;
+    right: 15px;
+}
+#toDoListItem{
+    margin-bottom: 3%;
+}
 .loggedin-div {
     width: 20%;
     margin: 0px auto;
@@ -339,6 +346,9 @@ input {
 }
 .main-div input:focus {
 border: 1px solid #999;
+}
+#todo-list{
+    color: white;
 }
 #logoutButton {
     position: fixed;
