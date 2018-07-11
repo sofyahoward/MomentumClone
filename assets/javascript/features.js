@@ -1,6 +1,44 @@
 // initializing moment.js
 moment().format();
 
+var database = firebase.database();
+
+    function addNoteToDataBase(text, userId) {
+        database.ref('notes/' + userId).push({
+            text: text,
+            status: 'active'
+        });
+    }
+
+    function updateNoteInDatabase(uid, status) {
+
+    }
+
+    function displayNotes(notes) {
+        console.log(notes);
+    }
+
+    function addTodoItem(todoItem) {
+        $("#todo-list").append("<li><label><input type='checkbox' name='todo-item-done' class='filled-in todo-item-done' value='" + todoItem + "' /> " + todoItem + " <button class='todo-item-delete waves-effect waves-light btn'>Remove</button></label></li>");
+        $("#new-todo-item").val("");
+      }
+
+    function initNotes() {
+        var user = firebase.auth().currentUser;
+        var notesRef = database.ref('notes/' + user.uid);
+        notesRef.once('value').then(function(snapshot) {
+            var notes = snapshot.val();
+
+            displayNotes(notes);
+            
+        });
+        notesRef.on("child_added", function(childSnapshot, prevChildKey) {
+            var text = childSnapshot.val().text;
+            addTodoItem(text);
+        });
+
+        // notesRef.on('child_added', function )
+    }
 $(document).ready( function(){
     // google searchbar /////////////////////////////////////////////////////////////////////////////////////////
     (function () {
@@ -19,6 +57,46 @@ $(document).ready( function(){
     // swipeable tabs //////////////////////////////////////////////////////////////////////////////////////
     $('.tabs').tabs();
     
+    var database = firebase.database();
+
+
+    // Add initNotes() to the notes button and 
+    function addNoteToDataBase(text, userId) {
+        database.ref('notes/' + userId).push({
+            text: text,
+            status: 'active'
+        });
+    }
+
+    function updateNoteInDatabase(uid, status) {
+
+    }
+
+    function displayNotes(notes) {
+        console.log(notes);
+    }
+
+    function addTodoItem(todoItem) {
+        $("#todo-list").append("<li><label><input type='checkbox' name='todo-item-done' class='filled-in todo-item-done' value='" + todoItem + "' /> " + todoItem + " <button class='todo-item-delete waves-effect waves-light btn'>Remove</button></label></li>");
+        $("#new-todo-item").val("");
+      }
+
+    function initNotes() {
+        var user = firebase.auth().currentUser;
+        var notesRef = database.ref('notes/' + user.uid);
+        notesRef.once('value').then(function(snapshot) {
+            var notes = snapshot.val();
+
+            displayNotes(notes);
+            
+        });
+        notesRef.on("child_added", function(childSnapshot, prevChildKey) {
+            var text = childSnapshot.val().text;
+            addTodoItem(text);
+        });
+
+        // notesRef.on('child_added', function )
+    }
     // to-do list /////////////////////////////////////////////////////////////////////////////////////////
     function addTodoItem() {
         var todoItem = $("#new-todo-item").val();
@@ -40,7 +118,10 @@ $(document).ready( function(){
       $(function() {
         $("#add-todo-item").on('click', function(e){
           e.preventDefault();
-          addTodoItem()
+        //   addTodoItem()
+        var userId = firebase.auth().currentUser.uid;
+        var text = $("#new-todo-item").val();
+        addNoteToDataBase(text, userId);
         });
         
       //EVENT DELEGATION
