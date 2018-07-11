@@ -2,7 +2,7 @@
 moment().format();
 
 $(document).ready( function(){
-    // google searchbar
+    // google searchbar /////////////////////////////////////////////////////////////////////////////////////////
     (function () {
         var cx = '014280645296093928214:imfnxx30oyo';
         var gcse = document.createElement('script');
@@ -13,13 +13,50 @@ $(document).ready( function(){
         s.parentNode.insertBefore(gcse, s);
     })();
 
-    // weather modal
+    // weather modal ///////////////////////////////////////////////////////////////////////////////////////
     $('.modal').modal();
 
-    // swipeable tabs
+    // swipeable tabs //////////////////////////////////////////////////////////////////////////////////////
     $('.tabs').tabs();
+    
+    // to-do list /////////////////////////////////////////////////////////////////////////////////////////
+    function addTodoItem() {
+        var todoItem = $("#new-todo-item").val();
+        $("#todo-list").append("<li><label><input type='checkbox' name='todo-item-done' class='filled-in todo-item-done' value='" + todoItem + "' /> " + todoItem + " <button class='todo-item-delete waves-effect waves-light btn'>Remove</button></label></li>");
+        $("#new-todo-item").val("");
+      }
+      
+      function deleteTodoItem(e, item) {
+        e.preventDefault();
+        $(item).parent().fadeOut('slow', function() { 
+          $(item).parent().remove();
+        });
+      }
+                            
+      function completeTodoItem() {  
+        $(this).parent().toggleClass("strike");
+      }
+      
+      $(function() {
+        $("#add-todo-item").on('click', function(e){
+          e.preventDefault();
+          addTodoItem()
+        });
+        
+      //EVENT DELEGATION
+      //#todo-list is the event handler because .todo-item-delete doesn't exist when the document loads, it is generated later by a todo entry
+      //https://learn.jquery.com/events/event-delegation/
+      
+        $("#todo-list").on('click', '.todo-item-delete', function(e){
+          var item = this; 
+          deleteTodoItem(e, item)
+        })
+        
+        $(document).on('click', ".todo-item-done", completeTodoItem)
+      
+      });
 
-    // generate random quote
+    // generate random quote /////////////////////////////////////////////////////////////////////////////////
     // hold the link to the API endpoint
     var forismaticAPI = 'https://api.forismatic.com/api/1.0/?method=getQuote&format=jsonp&lang=en&jsonp=?';
 
@@ -31,7 +68,7 @@ $(document).ready( function(){
             $("#quote").append('<blockquote>' + data.quoteText + '</blockquote>' + '<p id="author"> —  ' + data.quoteAuthor + '</p>')
         });
 
-        // get geolocation for weather
+        // get geolocation for weather //////////////////////////////////////////////////////////////////////////////////////////////////////
         var geoLocationAPI = "http://api.ipstack.com/170.140.105.75?access_key=0feabad0b36ed7c5509ef1acc3df509c"
         $.getJSON(geoLocationAPI, function (data) {
             $("#language").append(data.location.country_flag_emoji + "<br>" + data.location.languages[0].name)
@@ -40,8 +77,7 @@ $(document).ready( function(){
             var long = data.longitude;
             console.log(lat, long)
 
-            // grabbing list of local events from eventbrite
-            // this seems to break when there's no image for an event
+            // grabbing list of local events from eventbrite ///////////////////////////////////////////////////////////////////////////////////////////////////
             var token = '6A7TOLR2YF2M2YFHJDWA';
             var $events = $("#events");
             
@@ -96,6 +132,7 @@ $(document).ready( function(){
 
             });
 
+            // darksky weather ////////////////////////////////////////////////////////////////////////////////////
             var proxy = 'https://cryptic-headland-94862.herokuapp.com/';
             var darkSkyAPI = `https://api.darksky.net/forecast/8731619e7a890afa3e28099bc6d36035/${lat},${long}`;
 

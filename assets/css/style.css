@@ -200,6 +200,7 @@ input.gsc-input {
     width: 100px;
     /* background-color: #f4511e; */
 }
+/* EVENTS ***********************************************************************/
 #events a:hover {
     text-decoration: underline;
 }
@@ -237,7 +238,11 @@ input.gsc-input {
 #eventLink {
     color: #f4511e;
 }
-/* LOGIN AND SIGN UP STUFF *********************************************************************/
+/* TODO LIST *****************************************************************************/
+.strike {
+    text-decoration: line-through;
+}
+/* LOGIN AND SIGN UP *********************************************************************/
 #containerSignIn {
     width:100%;
     height:100%;
