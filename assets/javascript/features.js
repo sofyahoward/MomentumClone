@@ -19,7 +19,7 @@ moment().format();
 //     }
 
     function addTodoItem(todoItem) {
-        $("#todo-list").append("<li><label><input type='checkbox' name='todo-item-done' class='filled-in todo-item-done' value='" + todoItem + "' /> " + todoItem + " <button class='todo-item-delete waves-effect waves-light btn'>Remove</button></label></li>");
+        $("#todo-list").append("<li><label class='labelToDo'><input type='checkbox' name='todo-item-done' class='filled-in todo-item-done' value='" + todoItem + "' /> " + todoItem + " <button class='todo-item-delete waves-effect waves-light btn'>Remove</button></label></li>");
         $("#new-todo-item").val("");
       }
 
@@ -71,14 +71,10 @@ $(document).ready( function(){
          });
         notesRef.on("child_added", function(childSnapshot, prevChildKey) {
             var text = childSnapshot.val().text;
-            // addTodoItem(text);
-            // $("#todo-list").append(text);
             $("#todo-list").append("<li id='toDoListItem'><label><input type='checkbox' name='todo-item-done' class='filled-in todo-item-done' value='" + text + "' /> "+ text +" <button id='deleteItemBtn' class='todo-item-delete waves-effect waves-light btn'>Remove</button></label></li>")
         });
 
 });
-
-    // Add initNotes() to the notes button and 
 
     // this adds notes to the database
     function addNoteToDataBase(text, userId) {
@@ -93,12 +89,19 @@ $(document).ready( function(){
     //   })
 
 
-    function updateNoteInDatabase(uid, status) {
-
-    }
+    
+    // $("label").click(function updateNoteInDatabaseToCompleted(uid, status) {
+    //     //if pressing on the item
+    //     //update status to "completed"
+    //     database.ref('notes/' + userId).update({
+    //         status: 'completed'
+    //     });
+    // });
+    
 
     function displayNotes(notes) {
         console.log(notes);
+        //
     }
     
     
@@ -125,13 +128,30 @@ $(document).ready( function(){
     //     $("#todo-list").append("<li><label><input type='checkbox' name='todo-item-done' class='filled-in todo-item-done' value='" + todoItem + "' /> " + todoItem + " <button class='todo-item-delete waves-effect waves-light btn'>Remove</button></label></li>");
     //     $("#new-todo-item").val("");
     //   }
-      
-      function deleteTodoItem(e, item) {
-        e.preventDefault();
-        $(item).parent().fadeOut('slow', function() { 
-          $(item).parent().remove();
+    //   $("#deleteItemBtn").click(console.log("hello"));
+    
+    // $("#deleteItemBtn").click());
+
+
+    function addNoteToDataBase(text, userId) {
+        database.ref('notes/' + userId).push({
+            text: text,
+            status: 'active'
         });
-      }
+    }
+    function updateNoteInDatabaseToArchived(userId, status) {
+        //if pressed on remove button
+        //update status to "archived"
+    }
+
+    function deleteTodoItem(e, item) {
+    e.preventDefault();
+    $(item).parent().fadeOut('slow', function() { 
+        $(item).parent().remove();
+      })
+      
+  };
+      
                             
       function completeTodoItem() {  
         $(this).parent().toggleClass("strike");
