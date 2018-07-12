@@ -71,7 +71,7 @@ $(document).ready( function(){
          });
         notesRef.on("child_added", function(childSnapshot, prevChildKey) {
             var text = childSnapshot.val().text;
-            $("#todo-list").append("<li id='toDoListItem'><label><input type='checkbox' name='todo-item-done' class='filled-in todo-item-done' value='" + text + "' /> "+ text +" <button id='deleteItemBtn' class='todo-item-delete waves-effect waves-light btn'>Remove</button></label></li>")
+            $("#todo-list").append("<li id='toDoListItem'><label><input type='checkbox' name='todo-item-done' class='filled-in todo-item-done' value='" + text + "' /> "+ text +" <button class='todo-item-delete waves-effect waves-light btn deleteItemBtn'>Remove</button></label></li>")
         });
 
 });
@@ -140,8 +140,12 @@ $(document).ready( function(){
         });
     }
     function updateNoteInDatabaseToArchived(userId, status) {
-        //if pressed on remove button
-        //update status to "archived"
+        status: status;
+        var user = firebase.auth().currentUser;
+        var notesRef = database.ref('notes/' + user.uid);
+        database.ref('notes/' + userId).set({
+                    status: 'archived'
+                });
     }
 
     function deleteTodoItem(e, item) {
@@ -149,7 +153,7 @@ $(document).ready( function(){
     $(item).parent().fadeOut('slow', function() { 
         $(item).parent().remove();
       })
-      
+      updateNoteInDatabaseToArchived();
   };
       
                             
