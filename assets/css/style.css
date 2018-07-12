@@ -289,7 +289,7 @@ input.gsc-input {
 input {
     color: white;
 }
-#deleteItemBtn{
+.deleteItemBtn{
     position: fixed;
     right: 15px;
 }
@@ -351,15 +351,18 @@ border: 1px solid #999;
     color: white;
 }
 #logoutButton {
+    padding-top: 1%;
     position: fixed;
-    margin-left: 67%;
-    margin-top: -6%;
-    z-index:2;
-    width: 65px;
-    height: 65px;
-    background: transparent;
-    border: none;
-    border-radius:10px;
+    left: 7%;
+    top: 85%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    background-color: rgba(1, 11, 28, 0.65);
+    color: white;
+    border-radius: 5px;
+    height: fit-content;
+    margin-top: 3.5%;
 }
 #logoutButton:hover {
     background-color: rgb(0, 21, 29, 0.7);
