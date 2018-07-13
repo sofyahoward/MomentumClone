@@ -18,10 +18,10 @@ moment().format();
 //         console.log(notes);
 //     }
 
-    function addTodoItem(todoItem) {
-        $("#todo-list").append("<li><label class='labelToDo'><input type='checkbox' name='todo-item-done' class='filled-in todo-item-done' value='" + todoItem + "' /> " + todoItem + " <button class='todo-item-delete waves-effect waves-light btn'>Remove</button></label></li>");
-        $("#new-todo-item").val("");
-      }
+    // function addTodoItem(todoItem) {
+    //     $("#todo-list").append("<li><label class='labelToDo'><input type='checkbox' name='todo-item-done' class='filled-in todo-item-done' value='" + todoItem + "' /> " + todoItem + " <button class='todo-item-delete waves-effect waves-light btn'>Remove</button></label></li>");
+    //     $("#new-todo-item").val("");
+    //   }
 
     // function initNotes() {
     //     var user = firebase.auth().currentUser;
@@ -244,7 +244,7 @@ $(document).ready( function(){
 
                     // the event times need to be converted to an unstandable format
 
-                    }
+                    } // closing for loop
                     eventList += `</ul>`;
                     $events.html(eventList);
 
