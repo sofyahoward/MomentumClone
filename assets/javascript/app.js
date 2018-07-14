@@ -1,41 +1,27 @@
 // initializing moment.js
 moment().format();
-console.log("current time is " + moment().format("LT"));
 
+// putting 0 if the number is less than 10
 function checkTime(i) {
-    if (i < 10) {
-        i = "0" + i;
-    }
+    if (i < 10) { i = "0" + i };
     return i;
-}
+};
 
-// fetching current time
-function getTime() {
-    var today = new Date();
-    console.log();
-    var h = today.getHours();
-    var m = today.getMinutes();
-    m = checkTime(m);
-    return { hour: h, minute: m };
-}
-console.log(getTime());
-
+// showing real time
 $(document).ready( function() {
-    // showing real time
     function startTime() {
         var today = new Date();
         var h = today.getHours();
         var m = today.getMinutes();
         m = checkTime(m);
-
-        // document.getElementById('time').innerHTML = h + ":" + m;
+        //append time to a div on html page
         document.getElementById('time').innerHTML = moment().format("LT");
         t = setTimeout( function() {
             startTime();
         }, 500);
     }
     startTime();
-}); // closing ready function
+});
 
 // display login info upon click of the button
 function loginDisplay() {
@@ -62,10 +48,10 @@ function signUp() {
     var password = document.getElementById("password_fieldSignUp").value;
     var username = document.getElementById("userName_fieldSignUp").value;
 
+    //greet the user according to time of day
     function updateGreeting() {
         var user = firebase.auth().currentUser;
             var hour = new Date().getHours();
-                // need condition for the wee hours of the morning
                 var greeting;
                 if (hour < 12) {
                     greeting = "Good morning,";
@@ -74,16 +60,13 @@ function signUp() {
                 } else if (hour > 17 || hour < 5) {
                     greeting = "Good evening,"
                 }
-            document.getElementById('user_para').innerHTML= greeting + " " + ((user.displayName) ? user.displayName : "") ;
-            // console.log('hour', );
-            console.log(user.displayName);
-    }
+                document.getElementById('user_para').innerHTML= greeting + " " + ((user.displayName) ? user.displayName : "");
+    };
 //create a user in firebase
 firebase.auth().createUserWithEmailAndPassword(email, password)
 //add a custom username to firebase
     .then(function(user) {
         var database = firebase.database();
-        console.log(JSON.stringify(user));
         var user = firebase.auth().currentUser;
         function writeUserData(userId, username, email, ) {
             firebase.database().ref('users/' + userId).set({
@@ -97,19 +80,14 @@ firebase.auth().createUserWithEmailAndPassword(email, password)
         }).then(function() {
             updateGreeting();
         });
-   
 }).catch(function(error) {
     // handle errors here
-    var errorCode = error.code;
     var errorMessage = error.message;
     $(".error").append("Error : "+ errorMessage)
-  }); // closing user function
+    }); 
 
 // control the state of the application and what is visible upon sign in
     firebase.auth().onAuthStateChanged( function(user) {
-        // console.log(user);
-        // console.log(username);
-        // console.log(user.displayName);
         if (user) {
             $("#signup_div").hide();
             $("#signUpBackground").hide();
@@ -121,15 +99,109 @@ firebase.auth().createUserWithEmailAndPassword(email, password)
             $("#eventsTrigger").show();
             $("#quote").show();
             document.getElementById('myDayTrigger').style.display = "block";
-
             document.getElementById("user_div").style.display = "block";
-            // var user = firebase.auth().currentUser;
-            console.log(JSON.stringify(user));
+
             if (user != null) {
                 var email_id = user.emailSignUp;
                 var name_id = userName_fieldSignUp;
 
                 updateGreeting();
+                var hour = new Date().getHours();
+                var greeting;
+                if (hour < 12) {
+                    greeting = "Good morning,";
+                } else if (hour >= 12 && hour <= 17) {
+                    greeting = "Good afternoon,";
+                } else if (hour > 17 || hour < 5) {
+                    greeting = "Good evening,"
+                }
+            document.getElementById('user_para').innerHTML= greeting + " " + ((user.displayName) ? user.displayName : "");
+            };
+        };
+    });
+};
+
+// login functionality
+function login() {
+    firebase.auth().signOut();
+    var userEmail = document.getElementById("email_field").value;
+    var userPass = document.getElementById("password_field").value;
+
+    firebase.auth().signInWithEmailAndPassword(userEmail, userPass)
+        .catch(function(error) {
+            // Handle Errors here.
+            var errorMessage = error.message;
+            $(".error").append(errorMessage);
+        });
+
+    // control the state of the application and what is visible upon log in
+    firebase.auth().onAuthStateChanged( function(user) {
+        if (user) {
+            document.getElementById("user_div").style.display = "block";
+            document.getElementById("login_div").style.display = "none";
+            $("#logInBackground").hide();
+            $("#time").show();
+            $("#weather").show();
+            $("#searchBar").show();
+            $("#eventsTrigger").show();
+            $("#quote").show();
+            document.getElementById('myDayTrigger').style.display = "block";
+
+            function displayNotes(notes) {
+                for (var key in notes) {
+                    var note = $(`
+                        <li id='toDoListItem' data-uid="${key}">
+                            <label>
+                                <input 
+                                    type='checkbox' 
+                                    name='todo-item-done' 
+                                    class='filled-in todo-item-done' 
+                                    value='${notes[key].text}' />
+                                ${notes[key].text}
+                                <button 
+                                    class='todo-item-delete waves-effect waves-light btn deleteItemBtn'>
+                                        Remove
+                                </button>
+                            </label>
+                        </li>
+                    `);
+                    $("#todo-list").append(note);
+                }
+            }
+
+            var database = firebase.database();
+            var user = firebase.auth().currentUser;
+            var notesRef = database.ref('notes/' + user.uid);
+            notesRef.once('value').then(function(snapshot) {
+                var notes = snapshot.val();
+                console.log(notes);
+                displayNotes(notes);
+            
+             });
+            notesRef.on("child_added", function(childSnapshot, prevChildKey) {
+                var text = childSnapshot.val().text;
+                console.log(text);
+                $("#todo-list").append(`
+                    <li id='toDoListItem'>
+                        <label>
+                            <input 
+                                type='checkbox' 
+                                name='todo-item-done' 
+                                class='filled-in todo-item-done' 
+                                value='${text}' />
+                            ${text}
+                            <button 
+                                class='todo-item-delete waves-effect waves-light btn deleteItemBtn'>
+                                    Remove
+                            </button>
+                        </label>
+                    </li>
+                `);
+            });
+
+
+            if (user != null) {
+                var email_id = user.email;
                 var hour = new Date().getHours();
                 // need condition for the wee hours of the morning
                 var greeting;
@@ -140,68 +212,26 @@ firebase.auth().createUserWithEmailAndPassword(email, password)
                 } else if (hour > 17 || hour < 5) {
                     greeting = "Good evening,"
                 }
-            document.getElementById('user_para').innerHTML= greeting + " " + ((user.displayName) ? user.displayName : "") ;
-            // console.log('hour', );
-            console.log(user.displayName);
-            }
-        }
-    });
-} // closing signup function
-
-// login functionality
-function login() {
-    firebase.auth().signOut();
-    var userEmail = document.getElementById("email_field").value;
-    var userPass = document.getElementById("password_field").value;
-
-firebase.auth().signInWithEmailAndPassword(userEmail, userPass).catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // window.alert(errorMessage);
-
-    $(".error").append(errorMessage);
-});
-
-// control the state of the application and what is visible upon log in
-firebase.auth().onAuthStateChanged( function(user) {
-    if (user) {
-        console.log(user.uid);
-        document.getElementById("user_div").style.display = "block";
-        document.getElementById("login_div").style.display = "none";
-        $("#logInBackground").hide();
-        $("#time").show();
-        $("#weather").show();
-        $("#searchBar").show();
-        $("#eventsTrigger").show();
-        $("#quote").show();
-        document.getElementById('myDayTrigger').style.display = "block";
-
-        var user = firebase.auth().currentUser;
-        console.log(user.displayName);
-
-        if (user != null) {
-            var email_id = user.email;
-            var hour = new Date().getHours();
-            // need condition for the wee hours of the morning
-            var greeting;
-            if (hour < 12) {
-                greeting = "Good morning,";
-            } else if (hour >= 12 && hour <= 17) {
-                greeting = "Good afternoon,";
-            } else if (hour > 17 || hour < 5) {
-                greeting = "Good evening,"
-            }
-            document.getElementById('user_para').innerHTML=greeting + " " + ((user.displayName) ? user.displayName : "") ;
-            console.log('hour', );
-            }
-        } 
+                    document.getElementById('user_para').innerHTML=greeting + " " + ((user.displayName) ? user.displayName : "") ;
+            };
+        }; 
     }); // closing firebase auth
-} // closing login function
+}; // closing login function
 
 // logout functionality
 function logout() {
     firebase.auth().signOut();
+    function StopDisplayingNotes() {
+        var user = firebase.auth().currentUser;
+        var notesRef = firebase.database().ref('notes/' + user.uid);
+
+        notesRef.once('value').then(function(snapshot) {
+            var notes = "";
+            console.log(notes);
+  });
+    };
+    StopDisplayingNotes();
+    
     document.getElementById("email_field").value='';
     document.getElementById("password_field").value='';
     document.getElementById("login_div").style.display = "none";
@@ -251,7 +281,6 @@ $(document).ready(function(){
                          // limiting news list to 10
                          response.articles.length = 10;
                          var article = response.articles[i];
-                         console.dir(article);
     
                          var datePublished = moment(article.publishedAt).format("llll");
     

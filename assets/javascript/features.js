@@ -1,46 +1,8 @@
 // initializing moment.js
 moment().format();
 
-// var database = firebase.database();
-
-//     function addNoteToDataBase(text, userId) {
-//         database.ref('notes/' + userId).push({
-//             text: text,
-//             status: 'active'
-//         });
-//     }
-
-//     function updateNoteInDatabase(uid, status) {
-
-//     }
-
-//     function displayNotes(notes) {
-//         console.log(notes);
-//     }
-
-    // function addTodoItem(todoItem) {
-    //     $("#todo-list").append("<li><label class='labelToDo'><input type='checkbox' name='todo-item-done' class='filled-in todo-item-done' value='" + todoItem + "' /> " + todoItem + " <button class='todo-item-delete waves-effect waves-light btn'>Remove</button></label></li>");
-    //     $("#new-todo-item").val("");
-    //   }
-
-    // function initNotes() {
-    //     var user = firebase.auth().currentUser;
-    //     var notesRef = database.ref('notes/' + user.uid);
-    //     notesRef.once('value').then(function(snapshot) {
-    //         var notes = snapshot.val();
-
-    //         displayNotes(notes);
-            
-    //     });
-    //     notesRef.on("child_added", function(childSnapshot, prevChildKey) {
-    //         var text = childSnapshot.val().text;
-    //         addTodoItem(text);
-    //     });
-
-    //     // notesRef.on('child_added', function )
-    // }
 $(document).ready( function(){
-    // google searchbar /////////////////////////////////////////////////////////////////////////////////////////
+    // google searchbar
     (function () {
         var cx = '014280645296093928214:imfnxx30oyo';
         var gcse = document.createElement('script');
@@ -51,139 +13,13 @@ $(document).ready( function(){
         s.parentNode.insertBefore(gcse, s);
     })();
 
-    // weather modal ///////////////////////////////////////////////////////////////////////////////////////
+    // weather modal
     $('.modal').modal();
 
-    // swipeable tabs //////////////////////////////////////////////////////////////////////////////////////
+    // swipeable tabs 
     $('.tabs').tabs();
-    
-    // firebase to pull out user specific notes
-    var database = firebase.database();
-    
-    $("#myDayTrigger").click(function initNotes() {
-        var user = firebase.auth().currentUser;
-        var notesRef = database.ref('notes/' + user.uid);
-        notesRef.once('value').then(function(snapshot) {
-            var notes = snapshot.val();
-            console.log(notes);
-            displayNotes(notes);
-        
-         });
-        notesRef.on("child_added", function(childSnapshot, prevChildKey) {
-            var text = childSnapshot.val().text;
-            $("#todo-list").append("<li id='toDoListItem'><label><input type='checkbox' name='todo-item-done' class='filled-in todo-item-done' value='" + text + "' /> "+ text +" <button class='todo-item-delete waves-effect waves-light btn deleteItemBtn'>Remove</button></label></li>")
-        });
 
-});
-
-    // this adds notes to the database
-    function addNoteToDataBase(text, userId) {
-        database.ref('notes/' + userId).push({
-            text: text,
-            status: 'active'
-        });
-    }
-    // this appends notes to the screen upon click of the button to add a new note
-    // $("#add-todo-item").click(function addTodoItem(todoItem) {
-    //     $("#todo-list").append("<li><label><input type='checkbox' name='todo-item-done' class='filled-in todo-item-done' value='" + document.getElementById("new-todo-item").value + "' /> "+ document.getElementById("new-todo-item").value +" <button class='todo-item-delete waves-effect waves-light btn'>Remove</button></label></li>");
-    //   })
-
-
-    
-    // $("label").click(function updateNoteInDatabaseToCompleted(uid, status) {
-    //     //if pressing on the item
-    //     //update status to "completed"
-    //     database.ref('notes/' + userId).update({
-    //         status: 'completed'
-    //     });
-    // });
-    
-
-    function displayNotes(notes) {
-        console.log(notes);
-        //
-    }
-    
-    
-
-    // function initNotes() {
-    //     var user = firebase.auth().currentUser;
-    //     var notesRef = database.ref('notes/' + user.uid);
-    //     notesRef.once('value').then(function(snapshot) {
-    //         var notes = snapshot.val();
-
-    //         displayNotes(notes);
-            
-    //     });
-    //     notesRef.on("child_added", function(childSnapshot, prevChildKey) {
-    //         var text = childSnapshot.val().text;
-    //         addTodoItem(text);
-    //     });
-
-    //     // notesRef.on('child_added', function )
-    // }
-    // to-do list /////////////////////////////////////////////////////////////////////////////////////////
-    // function addTodoItem() {
-    //     var todoItem = $("#new-todo-item").val();
-    //     $("#todo-list").append("<li><label><input type='checkbox' name='todo-item-done' class='filled-in todo-item-done' value='" + todoItem + "' /> " + todoItem + " <button class='todo-item-delete waves-effect waves-light btn'>Remove</button></label></li>");
-    //     $("#new-todo-item").val("");
-    //   }
-    //   $("#deleteItemBtn").click(console.log("hello"));
-    
-    // $("#deleteItemBtn").click());
-
-
-    function addNoteToDataBase(text, userId) {
-        database.ref('notes/' + userId).push({
-            text: text,
-            status: 'active'
-        });
-    }
-    function updateNoteInDatabaseToArchived(userId, status) {
-        status: status;
-        var user = firebase.auth().currentUser;
-        var notesRef = database.ref('notes/' + user.uid);
-        database.ref('notes/' + userId).set({
-                    status: 'archived'
-                });
-    }
-
-    function deleteTodoItem(e, item) {
-    e.preventDefault();
-    $(item).parent().fadeOut('slow', function() { 
-        $(item).parent().remove();
-      })
-      updateNoteInDatabaseToArchived();
-  };
-      
-                            
-      function completeTodoItem() {  
-        $(this).parent().toggleClass("strike");
-      }
-      
-      $(function() {
-        $("#add-todo-item").on('click', function(e){
-          e.preventDefault();
-        //   addTodoItem()
-        var userId = firebase.auth().currentUser.uid;
-        var text = $("#new-todo-item").val();
-        addNoteToDataBase(text, userId);
-        });
-        
-      //EVENT DELEGATION
-      //#todo-list is the event handler because .todo-item-delete doesn't exist when the document loads, it is generated later by a todo entry
-      //https://learn.jquery.com/events/event-delegation/
-      
-        $("#todo-list").on('click', '.todo-item-delete', function(e){
-          var item = this; 
-          deleteTodoItem(e, item)
-        })
-        
-        $(document).on('click', ".todo-item-done", completeTodoItem)
-      
-      });
-
-    // generate random quote /////////////////////////////////////////////////////////////////////////////////
+    // generate random quote
     // hold the link to the API endpoint
     var forismaticAPI = 'https://api.forismatic.com/api/1.0/?method=getQuote&format=jsonp&lang=en&jsonp=?';
 
@@ -195,28 +31,25 @@ $(document).ready( function(){
             $("#quote").append('<blockquote>' + data.quoteText + '</blockquote>' + '<p id="author"> —  ' + data.quoteAuthor + '</p>')
         });
 
-        // get geolocation for weather //////////////////////////////////////////////////////////////////////////////////////////////////////
+        // get geolocation for weather
         var geoLocationAPI = "http://api.ipstack.com/170.140.105.75?access_key=0feabad0b36ed7c5509ef1acc3df509c"
         $.getJSON(geoLocationAPI, function (data) {
             $("#language").append(data.location.country_flag_emoji + "<br>" + data.location.languages[0].name)
             $("#weather").append(data.city + " " + data.region_name)
             var lat = data.latitude;
             var long = data.longitude;
-            console.log(lat, long)
 
-            // grabbing list of local events from eventbrite ///////////////////////////////////////////////////////////////////////////////////////////////////
+            // grabbing list of local events from eventbrite
             var token = '6A7TOLR2YF2M2YFHJDWA';
             var $events = $("#events");
             
             $.get('https://www.eventbriteapi.com/v3/events/search/?token='+token+'&expand=venue'+'&sort_by=date&location.latitude='+lat+'&location.longitude='+long+'' , function(res) {
-                console.log(res);
                 if (res.events.length) {
                     var eventList = `<ul class='eventList'>`;
                     for (var i = 0; i < res.events.length; i++) {
                         // limiting event list to 5
                         res.events.length = 5;
                         var event = res.events[i];
-                        console.dir(event);
 
                         var startTime = moment(event.start.local).format("llll");
                         var endTime = moment(event.end.local).format("LT");
@@ -242,24 +75,15 @@ $(document).ready( function(){
                         </div>
                     </div></li>`;
 
-                    // the event times need to be converted to an unstandable format
-
                     } // closing for loop
                     eventList += `</ul>`;
                     $events.html(eventList);
-
                 } else {
                     $events.html("<p>Sorry, there are no upcoming events in your area.</p>");
-                }
-
-                var eventLat = event.venue.latitude;
-                    console.log(eventLat);
-                var eventLong = event.venue.longitude;
-                    console.log(eventLong);
-
+                };
             });
 
-            // darksky weather ////////////////////////////////////////////////////////////////////////////////////
+            // darksky weather
             var proxy = 'https://cryptic-headland-94862.herokuapp.com/';
             var darkSkyAPI = `https://api.darksky.net/forecast/8731619e7a890afa3e28099bc6d36035/${lat},${long}`;
 
@@ -267,9 +91,6 @@ $(document).ready( function(){
             $.ajax({
                 url: proxy + darkSkyAPI,
                 success: function (res) {
-                    console.log(res);
-
-                    console.log(res.daily.data[1].time)
                     var convertedDate1 = new Date(res.daily.data[1].time * 1000);
                     var convertedDate2 = new Date(res.daily.data[2].time * 1000);
                     var convertedDate3 = new Date(res.daily.data[3].time * 1000);
@@ -312,8 +133,82 @@ $(document).ready( function(){
             }); // closing darksky API call
         }); // closing get for geolocation
 
-    // changing google searchbar placeholder text
-    // this is not working :(
-    $('#gsc-i-id1').placeholder = 'Search Google';
+    // to-do list functionality
+    // define firebase database as a global variable
+    var database = firebase.database();
+    
+    // add an item
+    function addTodoItem() {
+        // adds item to the screen
+        var todoItem = $("#new-todo-item").val();
+        $("#todo-list").append("<li id='toDoListItem'><label><input type='checkbox' name='todo-item-done' class='filled-in todo-item-done' value='" + todoItem + "' /> " + todoItem + " <button class='todo-item-delete waves-effect waves-light btn deleteItemBtn'>Remove</button></label></li>");
+        $("#new-todo-item").val("");
 
+       // adds item into Firebase
+        function addNoteToDataBase(userId) {
+            var userId = firebase.auth().currentUser.uid;
+                database.ref('notes/' + userId).push({
+                    text: todoItem,
+                    status: 'active'
+                });
+        };
+        addNoteToDataBase(); 
+    };
+    
+    //remove an item from the screen
+    function deleteTodoItem(e, item) {
+        var itemToRemove = $(".filled-in").val();
+        console.log(itemToRemove);
+        e.preventDefault();
+        $(item).parent().fadeOut('slow', function() { 
+            $(item).parent().remove();
+        });
+        //archive the note in the database
+        function setNoteInDataBaseToArchived(userId) {
+            var userId = firebase.auth().currentUser.uid;
+                database.ref('notes/' + userId).update({
+                    text: itemToRemove,
+                    status: 'archived'
+                });
+        };
+        setNoteInDataBaseToArchived(); 
+    };
+    
+    //complete and cross off an item
+    function completeTodoItem() { 
+        var itemToComplete = $(".filled-in").val();
+        var uid = $(this).data('uid'); 
+        
+        $(this).parent().toggleClass("strike");
+        
+        //set note in the database to completed
+        function setNoteInDataBaseToCompleted(userId) {
+            var userId = firebase.auth().currentUser.uid;
+            database.ref('notes/' + userId + "/" + uid).update({
+                text: itemToComplete,
+                status: 'completed'
+            });
+        };
+        setNoteInDataBaseToCompleted(); 
+    };
+
+    
+    
+    $(function() {
+        //carry out the add function on click of a button
+        $("#add-todo-item").on('click', function(e){
+            e.preventDefault();
+            addTodoItem()
+        });
+        
+        //carry out the delete function on click of a button
+        $("#todo-list").on('click', '.todo-item-delete', function(e){
+            var item = this; 
+            deleteTodoItem(e, item)
+        });
+        
+        //carry out the complete function on click of a button
+        $(document).on('click', ".todo-item-done", completeTodoItem)
+       
+    });
 }); // closing ready function
