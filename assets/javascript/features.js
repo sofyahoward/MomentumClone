@@ -141,8 +141,8 @@ $(document).ready( function(){
     function addTodoItem() {
         // adds item to the screen
         var todoItem = $("#new-todo-item").val();
-        $("#todo-list").append("<li id='toDoListItem'><label><input type='checkbox' name='todo-item-done' class='filled-in todo-item-done' value='" + todoItem + "' /> " + todoItem + " <button class='todo-item-delete waves-effect waves-light btn deleteItemBtn'>Remove</button></label></li>");
-        $("#new-todo-item").val("");
+        // $("#todo-list").append("<li id='toDoListItem'><label><input type='checkbox' name='todo-item-done' class='filled-in todo-item-done' value='" + todoItem + "' /> " + todoItem + " <button class='todo-item-delete waves-effect waves-light btn deleteItemBtn'>Remove</button></label></li>");
+        // $("#new-todo-item").val("");
 
        // adds item into Firebase
         function addNoteToDataBase(userId) {
@@ -156,18 +156,19 @@ $(document).ready( function(){
     };
     
     //remove an item from the screen
-    function deleteTodoItem(e, item) {
-        var itemToRemove = $(".filled-in").val();
-        console.log(itemToRemove);
+    function deleteTodoItem(e) {
         e.preventDefault();
-        $(item).parent().fadeOut('slow', function() { 
-            $(item).parent().remove();
-        });
+        // var itemToRemove = $(this).val();
+        var uid = $(this).data('uid');
+        console.log(this);
+        // console.log(itemToRemove);
+        // $(item).parent().fadeOut('slow', function() { 
+        //     $(item).parent().remove();
+        // });
         //archive the note in the database
-        function setNoteInDataBaseToArchived(userId) {
+        function setNoteInDataBaseToArchived() {
             var userId = firebase.auth().currentUser.uid;
-                database.ref('notes/' + userId).update({
-                    text: itemToRemove,
+                database.ref('notes/' + userId + "/" + uid).update({
                     status: 'archived'
                 });
         };
@@ -176,16 +177,16 @@ $(document).ready( function(){
     
     //complete and cross off an item
     function completeTodoItem() { 
-        var itemToComplete = $(".filled-in").val();
+        // var itemToComplete = $(this).val();
         var uid = $(this).data('uid'); 
         
-        $(this).parent().toggleClass("strike");
+        // $(this).parent().toggleClass("strike");
         
         //set note in the database to completed
         function setNoteInDataBaseToCompleted(userId) {
             var userId = firebase.auth().currentUser.uid;
             database.ref('notes/' + userId + "/" + uid).update({
-                text: itemToComplete,
+                // text: itemToComplete,
                 status: 'completed'
             });
         };
@@ -202,10 +203,7 @@ $(document).ready( function(){
         });
         
         //carry out the delete function on click of a button
-        $("#todo-list").on('click', '.todo-item-delete', function(e){
-            var item = this; 
-            deleteTodoItem(e, item)
-        });
+        $("#todo-list").on('click', '.todo-item-delete', deleteTodoItem);
         
         //carry out the complete function on click of a button
         $(document).on('click', ".todo-item-done", completeTodoItem)
