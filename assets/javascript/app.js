@@ -101,6 +101,50 @@ firebase.auth().createUserWithEmailAndPassword(email, password)
             document.getElementById('myDayTrigger').style.display = "block";
             document.getElementById("user_div").style.display = "block";
 
+            function displayNotes(notes) {
+                $("#todo-list").empty();
+                for (var key in notes) {
+                    var classes = '';
+                    if(notes[key].status === 'completed') classes += ' strike';
+                    else if(notes[key].status === 'archived') continue;
+                    
+                    var note = $(`
+                        <li id='toDoListItem' data-uid="${key}">
+                            <label class=${classes}>
+                                <input 
+                                    type='checkbox' 
+                                    name='todo-item-done' 
+                                    class='filled-in todo-item-done' 
+                                    value='${notes[key].text}'
+                                    data-uid="${key}" />
+                                ${notes[key].text}
+                                <button 
+                                    class='todo-item-delete waves-effect waves-light btn deleteItemBtn'
+                                    data-uid="${key}">
+                                        Remove
+                                </button>
+                            </label>
+                        </li>
+                    `);
+                    $("#todo-list").append(note);
+                }
+            }
+
+            var database = firebase.database();
+            var user = firebase.auth().currentUser;
+            var notesRef = database.ref('notes/' + user.uid);
+            // notesRef.once('value').then(function(snapshot) {
+            //     var notes = snapshot.val();
+            //     console.log(notes);
+            //     displayNotes(notes);
+            
+            //  });
+             notesRef.on('value', function(snapshot) {
+                var notes = snapshot.val();
+                displayNotes(notes);
+            
+             });
+
             if (user != null) {
                 var email_id = user.emailSignUp;
                 var name_id = userName_fieldSignUp;
@@ -147,6 +191,7 @@ function login() {
             $("#quote").show();
             document.getElementById('myDayTrigger').style.display = "block";
 
+            //append and display notes
             function displayNotes(notes) {
                 $("#todo-list").empty();
                 for (var key in notes) {
@@ -179,40 +224,12 @@ function login() {
             var database = firebase.database();
             var user = firebase.auth().currentUser;
             var notesRef = database.ref('notes/' + user.uid);
-            // notesRef.once('value').then(function(snapshot) {
-            //     var notes = snapshot.val();
-            //     console.log(notes);
-            //     displayNotes(notes);
             
-            //  });
              notesRef.on('value', function(snapshot) {
                 var notes = snapshot.val();
-                console.log(notes);
                 displayNotes(notes);
             
              });
-            // notesRef.on("child_added", function(childSnapshot, prevChildKey) {
-            //     var text = childSnapshot.val().text;
-            //     var key = childSnapshot.key;
-            //     console.log(text);
-            //     $("#todo-list").append(`
-            //         <li id='toDoListItem'>
-            //             <label>
-            //                 <input 
-            //                     type='checkbox' 
-            //                     name='todo-item-done' 
-            //                     class='filled-in todo-item-done' 
-            //                     value='${text}'
-            //                     data-uid="${key}" />
-            //                 ${text}
-            //                 <button 
-            //                     class='todo-item-delete waves-effect waves-light btn deleteItemBtn'>
-            //                         Remove
-            //                 </button>
-            //             </label>
-            //         </li>
-            //     `);
-            // });
 
 
             if (user != null) {

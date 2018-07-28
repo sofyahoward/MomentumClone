@@ -278,7 +278,8 @@ input.gsc-input {
     text-align: center;
     transform: translate(-50%, -50%);
     cursor: pointer;
-    background-color: rgb(1, 11, 28, 0.65);
+    background-color: rgb(1, 11, 28);
+    opacity: .75;
     color: white;
     border-radius: 5px;
     height: fit-content;
