@@ -38,6 +38,7 @@ $(document).ready( function(){
             $("#weather").append(data.city + " " + data.region_name)
             var lat = data.latitude;
             var long = data.longitude;
+            console.log(data)
 
             // grabbing list of local events from eventbrite
             var token = '6A7TOLR2YF2M2YFHJDWA';
